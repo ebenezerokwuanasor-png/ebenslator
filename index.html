@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Ebenslator - The Ultimate Scientific Calculator You Can Trust</title>
+  <meta name="description" content="Ebenslator is an incredibly powerful, ultra-accurate, and beautifully designed online scientific calculator. Solve any complex mathematical expression from A to Z, including advanced calculus, linear algebra, matrices, trigonometry, statistics, complex numbers, and unit conversions. Get smart, live recommendations as you type, and comprehensive diagnostic solutions for any syntax error.">
+  <meta name="keywords" content="Ebenslator, scientific calculator, online math solver, math expression solver, high-precision calculator, algebra calculator, matrix calculator, calculus derivative solver, math suggestions, smart calculator error correction, trusted math solver">
+  <meta name="author" content="Okwuanasor Ebenezer Onyekachukwu">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ebenslator.math">
+  <meta property="og:title" content="Ebenslator - The Scientific Calculator You Can Trust">
+  <meta property="og:description" content="Solve all mathematical expressions flawlessly. Discover smart live recommendations, detailed error-correcting guides, and full complex algebra / matrix execution built within a gorgeous modern interface.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1000">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Ebenslator - High-Accuracy Scientific Math Engine">
+  <meta property="twitter:description" content="Run basic to ultra-complex calculations including linear algebra, calculus derivatives, and trigonometric functions with direct recommendations and error diagnosis.">
+
+  <!-- Schema.org JSON-LD for Web Application SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Ebenslator",
+    "operatingSystem": "All",
+    "applicationCategory": "EducationalApplication",
+    "about": {
+      "@type": "AcademicSubject",
+      "name": "Mathematics"
+    },
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "description": "An ultra-accurate scientific calculator designed to solve any complex mathematical expression from basic arithmetic to advanced matrices, calculus, statistics, and trigonometry.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS & Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Math.js Integration for ultimate precision & comprehensive scientific capabilities -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .font-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Sleek scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(148, 163, 184, 0.1);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(139, 92, 246, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(139, 92, 246, 0.6);
+    }
+
+    /* LIGHT THEME (Default) */
+    body {
+      background-color: #f8fafc; /* Slate 50 */
+      color: #0f172a; /* Slate 900 */
+    }
+    .neon-card {
+      background-color: rgba(255, 255, 255, 0.96);
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .theme-header {
+      background-color: rgba(255, 255, 255, 0.85);
+      border-color: #e2e8f0;
+    }
+    .screen-bg {
+      background-color: #e2e8f0;
+      border-color: #cbd5e1;
+    }
+    .key-standard {
+      background-color: #ffffff;
+      border-color: #e2e8f0;
+      color: #1e293b;
+    }
+    .key-standard:hover {
+      background-color: #f1f5f9;
+    }
+    .key-operator {
+      background-color: rgba(139, 92, 246, 0.08);
+      border-color: rgba(139, 92, 246, 0.15);
+      color: #6d28d9;
+    }
+    .key-operator:hover {
+      background-color: rgba(139, 92, 246, 0.15);
+    }
+    .key-scientific {
+      background-color: rgba(5, 150, 105, 0.06);
+      border-color: rgba(5, 150, 105, 0.12);
+      color: #059669;
+    }
+    .key-scientific:hover {
+      background-color: rgba(5, 150, 105, 0.12);
+    }
+
+    /* DARK THEME toggle rule modifications */
+    .dark-mode {
+      background-color: #020617 !important; /* slate 950 */
+      color: #f8fafc !important; /* slate 50 */
+    }
+    .dark-mode .neon-card {
+      background-color: rgba(15, 23, 42, 0.88) !important;
+      border-color: #1e293b !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    }
+    .dark-mode .theme-header {
+      background-color: rgba(15, 23, 42, 0.6) !important;
+      border-color: #1e293b !important;
+    }
+    .dark-mode .screen-bg {
+      background-color: #020617 !important;
+      border-color: #1e293b !important;
+    }
+    .dark-mode .key-standard {
+      background-color: rgba(30, 41, 59, 0.4) !important;
+      border-color: rgba(51, 65, 85, 0.5) !important;
+      color: #f1f5f9 !important;
+    }
+    .dark-mode .key-standard:hover {
+      background-color: rgba(51, 65, 85, 0.6) !important;
+    }
+    .dark-mode .key-operator {
+      background-color: rgba(139, 92, 246, 0.15) !important;
+      border-color: rgba(139, 92, 246, 0.3) !important;
+      color: #a78bfa !important;
+    }
+    .dark-mode .key-operator:hover {
+      background-color: rgba(139, 92, 246, 0.25) !important;
+    }
+    .dark-mode .key-scientific {
+      background-color: rgba(16, 185, 129, 0.08) !important;
+      border-color: rgba(16, 185, 129, 0.2) !important;
+      color: #34d399 !important;
+    }
+    .dark-mode .key-scientific:hover {
+      background-color: rgba(16, 185, 129, 0.18) !important;
+    }
+
+    /* Advanced Fullscreen layout styles */
+    .fullscreen-active {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 40 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      border-radius: 0 !important;
+      background-color: rgba(248, 250, 252, 0.99) !important;
+      backdrop-filter: blur(28px) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      padding: 2.5rem !important;
+      overflow-y: auto !important;
+    }
+    .dark-mode .fullscreen-active {
+      background-color: rgba(2, 6, 23, 0.99) !important;
+    }
+    .fullscreen-active #buttonsPad button {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+      font-size: 1.25rem !important;
+      border-radius: 1.25rem !important;
+    }
+    .fullscreen-active #calcInput {
+      font-size: 3.5rem !important;
+      height: 5rem !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden relative selection:bg-violet-600 selection:text-white">
+
+  <!-- Background Decorative Nebula Orbs -->
+  <div class="absolute top-10 left-10 w-96 h-96 bg-violet-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-10 right-10 w-[450px] h-[450px] bg-indigo-600/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+  <!-- Header Banner -->
+  <header class="theme-header relative z-10 w-full pt-8 pb-6 px-4 md:px-8 border-b bg-white/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+      
+      <!-- Theme Switch Control -->
+      <div class="w-full flex justify-end mb-3">
+        <button id="themeToggleBtn" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-2 text-slate-800 shadow-sm">
+          <span id="themeToggleIcon" class="text-indigo-600"><i class="fa-solid fa-moon"></i></span>
+          <span id="themeToggleText">Switch to Dark Theme</span>
+        </button>
+      </div>
+
+      <!-- Title & Slogan -->
+      <h1 class="text-6xl md:text-7xl font-extrabold tracking-tight bg-gradient-to-r from-violet-700 via-indigo-600 to-emerald-600 bg-clip-text text-transparent select-none drop-shadow-sm font-heading animate-fade-in">
+        Ebenslator
+      </h1>
+      <p class="mt-3 text-lg md:text-xl text-slate-600 font-medium italic tracking-wide">
+        "A scientific calculator you can trust"
+      </p>
+      
+      <!-- Capability Badges -->
+      <div class="flex flex-wrap justify-center gap-2 mt-4 text-xs font-semibold">
+        <span class="px-3 py-1 bg-violet-100 text-violet-700 border border-violet-200 rounded-full shadow-sm">
+          <i class="fa-solid fa-square-root-variable mr-1"></i> High Precision MathJS Engine
+        </span>
+        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-full shadow-sm">
+          <i class="fa-solid fa-microchip mr-1"></i> Zero Redirect Anti-Intervention Ad-System
+        </span>
+        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-full shadow-sm">
+          <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Unified Integrated Alphabet Keypad
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="relative z-10 flex-grow max-w-7xl w-full mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left column: Elegant SEO Description & Guide (5 Cols) -->
+    <section class="lg:col-span-5 space-y-6">
+      
+      <!-- Interactive SEO Capability Block -->
+      <div class="neon-card rounded-3xl p-6 relative overflow-hidden">
+        <h2 class="text-2xl font-bold flex items-center gap-2 border-b border-slate-200 pb-3 mb-4">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600">
+            <i class="fa-solid fa-graduation-cap text-sm"></i>
+          </span>
+          Unmatched Mathematical Coverage
+        </h2>
+        
+        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+          Ebenslator is engineered specifically to eliminate calculation barriers across all engineering disciplines, physical sciences, and high-order algebra. Equipped with an internal <strong>A-Z integrated alphabet keypad</strong>, mobile and desktop users can execute complex functions requiring alphabetic notation cleanly without blocking system popups.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-start gap-3">
+            <div class="mt-1 text-emerald-600 text-sm"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3 class="text-sm font-semibold">Solve All Expressions from A to Z</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Supports matrices, trigonometry, logarithmic equations, statistics, factorials, conversions, standard scientific notations, and symbolic derivative analysis.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="mt-1 text-violet-600 text-sm"><i class="fa-solid fa-bolt"></i></div>
+            <div>
+              <h3 class="text-sm font-semibold">Contextual Formula Suggestions</h3>
+              <p class="text-xs text-slate-500 mt-0.5">As you begin typing, our semantic engine suggests function layouts like <code>sin(x)</code>, <code>log(x, base)</code>, and <code>derivative(f, x)</code> dynamically.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="mt-1 text-indigo-600 text-sm"><i class="fa-solid fa-keyboard"></i></div>
+            <div>
+              <h3 class="text-sm font-semibold">Integrated Virtual Keypad Tabs</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Seamlessly switch between numeric inputs, high-order scientific symbols, and a full alphabet pad for typing functions like `std` or `det` directly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Help Button & History Action Bar -->
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Interactive Help Engine Button -->
+        <button id="openHelpBtn" class="flex items-center justify-center gap-2 p-4 bg-gradient-to-r from-emerald-50 to-teal-100/50 border border-emerald-200 hover:border-emerald-400 rounded-2xl transition-all duration-150 shadow-md hover:scale-[1.02] cursor-pointer group text-left w-full animate-pulse">
+          <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 group-hover:bg-emerald-200">
+            <i class="fa-solid fa-circle-question"></i>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-emerald-800">Help & Tutoring</h3>
+            <p class="text-[10px] text-slate-500 font-bold">All Math & Engineering A-Z</p>
+          </div>
+        </button>
+
+        <!-- Saved History Sidebar Trigger -->
+        <button id="openHistoryBtn" class="flex items-center justify-center gap-2 p-4 bg-gradient-to-r from-violet-50 to-indigo-100/50 border border-violet-200 hover:border-violet-400 rounded-2xl transition-all duration-150 shadow-md hover:scale-[1.02] cursor-pointer group text-left w-full">
+          <div class="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center text-violet-700 group-hover:bg-violet-200">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-violet-800">Math Ledger</h3>
+            <p class="text-[10px] text-slate-500 font-semibold">Offline History Drawer</p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- Right column: The Gorgeous Scientific Calculator (7 Cols) -->
+    <section class="lg:col-span-7 w-full flex flex-col gap-4">
+      
+      <!-- Calculator Master Card -->
+      <div id="calculatorCard" class="neon-card rounded-3xl p-5 md:p-6 shadow-2xl relative transition-all duration-350 font-sans">
+        <!-- Upper Control Row -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div class="flex items-center gap-2">
+            <!-- Unified Keypad Tab Switchers -->
+            <div class="flex p-0.5 bg-slate-200/60 dark:bg-slate-800/60 rounded-xl border border-slate-300/40 font-bold">
+              <button id="tabNumericBtn" class="px-3 py-1 rounded-lg text-xs font-bold transition-all duration-150 bg-violet-600 text-white shadow-sm cursor-pointer">NUM</button>
+              <button id="tabScientificBtn" class="px-3 py-1 rounded-lg text-xs font-bold transition-all duration-150 text-slate-600 dark:text-slate-300 hover:text-slate-900 cursor-pointer">SCI</button>
+              <button id="tabAlphabetBtn" class="px-3 py-1 rounded-lg text-xs font-bold transition-all duration-150 text-slate-600 dark:text-slate-300 hover:text-slate-900 cursor-pointer">A-Z</button>
+            </div>
+
+            <!-- Direct Close Bigger View Button -->
+            <button id="closeBiggerViewFloatingBtn" class="hidden px-3 py-1.5 bg-rose-100 hover:bg-rose-250 border border-rose-300 text-rose-700 text-xs font-bold rounded-xl transition-all duration-150 cursor-pointer flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-compress text-rose-500 animate-pulse"></i> Return to Normal Size
+            </button>
+          </div>
+
+          <!-- Clean/Erase action control (Positioned so large digits never overlap input text) -->
+          <div class="flex items-center gap-2">
+            <button id="inlineClearBtn" class="px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-xs text-rose-700 border border-rose-200 font-bold rounded-xl transition-all duration-150 cursor-pointer" title="Reset current formula">
+              <i class="fa-regular fa-trash-can mr-1"></i> Clear Input
+            </button>
+
+            <!-- Toggle Radians vs Degrees -->
+            <div class="flex p-0.5 bg-slate-200/60 dark:bg-slate-800/60 rounded-xl border border-slate-300/40 font-bold">
+              <button id="radModeBtn" class="px-3 py-1 rounded-lg text-xs font-bold uppercase transition-all duration-150 bg-violet-600 text-white shadow-sm cursor-pointer">RAD</button>
+              <button id="degModeBtn" class="px-3 py-1 rounded-lg text-xs font-bold uppercase transition-all duration-150 text-slate-600 dark:text-slate-300 hover:text-slate-900 cursor-pointer">DEG</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculator Display Component -->
+        <div class="screen-bg rounded-2xl border p-4 shadow-inner mb-3 relative">
+          <!-- Secondary Equation Screen (Scrollable) -->
+          <div id="secondaryDisplay" class="h-6 text-right text-xs md:text-sm text-slate-500 font-code overflow-x-auto whitespace-nowrap scrollbar-none mb-1">
+            <!-- Example: sin(30 deg) + log(10) -->
+          </div>
+
+          <!-- Main Input Field with Smart Mobile Virtual Keyboard Blocker [inputmode="none"] -->
+          <div class="flex items-center gap-2">
+            <span class="text-violet-600 font-code text-xl md:text-2xl animate-pulse">⨠</span>
+            <input 
+              type="text" 
+              id="calcInput" 
+              placeholder="0" 
+              inputmode="none"
+              class="w-full bg-transparent border-none text-right font-code text-2xl md:text-3xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-0 select-all"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <!-- Smart Live Autocomplete & Predictive Formula Suggestions -->
+        <div id="suggestionsWrapper" class="mb-4 min-h-8 flex flex-wrap items-center gap-1.5 px-1 py-1 overflow-x-auto">
+          <span class="text-xs text-slate-500 italic">Start typing for formulas...</span>
+        </div>
+
+        <!-- Error & Explanation Interactive Diagnostic Container (Now completely static, no bounces) -->
+        <div id="errorDiagnosticBox" class="hidden bg-rose-50/95 border border-rose-200 rounded-2xl p-4 mb-4 transition-all duration-300 shadow-lg text-left font-sans">
+          <div class="flex items-start gap-3">
+            <div class="p-1.5 bg-rose-100 text-rose-700 rounded-lg text-sm shrink-0">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="flex-grow font-semibold">
+              <div class="flex items-center justify-between">
+                <h4 class="text-sm font-bold text-rose-800">Mathematical Diagnosis & Guide</h4>
+                <button id="closeDiagnosticBtn" class="text-rose-500 hover:text-rose-750 p-1 rounded transition-colors cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+              </div>
+              
+              <!-- Core Error Diagnostic message -->
+              <p id="errorDiagnosticMsg" class="text-xs text-slate-750 mt-1 leading-relaxed">
+                <!-- Why Error Occurred -->
+              </p>
+
+              <!-- Helpful Tutoring Advice Banner -->
+              <div class="mt-2.5 p-3 bg-amber-50 border border-amber-200 rounded-lg text-amber-950 text-xs flex items-start gap-1.5 text-left font-sans">
+                <span class="text-amber-600"><i class="fa-solid fa-circle-info"></i></span>
+                <span>
+                  <strong>Tip:</strong> We highly recommend checking this topic inside our interactive <button id="errorCheckTopicBtn" class="underline font-bold hover:text-amber-700 transition-colors cursor-pointer text-left">Help & Tutoring</button> panel to view proper input syntax templates and verified examples!
+                </span>
+              </div>
+
+              <!-- Attempt Auto-Fix button -->
+              <div class="mt-3 flex items-center gap-2">
+                <button id="errorAutoFixBtn" class="px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-800 text-xs font-bold rounded-lg border border-rose-300/40 transition-all cursor-pointer shadow-sm flex items-center gap-1">
+                  <i class="fa-solid fa-wrench text-xs"></i> Attempt Auto-Correction
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Keypads Grid (Smoothly swap between Numeric, Scientific, and A-Z Alphabet) -->
+        <div class="grid grid-cols-4 gap-2 md:gap-3" id="buttonsPad">
+          <!-- Dynamically Rendered Keys based on Tab state -->
+        </div>
+
+      </div>
+
+      <!-- Make Calculator Bigger / Smaller Toggle Action Button -->
+      <button id="makeBiggerBtn" class="w-full py-4 mt-1 bg-gradient-to-r from-violet-600/5 to-indigo-600/5 hover:from-violet-600/10 hover:to-indigo-600/10 border border-slate-200 hover:border-violet-400 text-slate-700 hover:text-slate-900 font-bold rounded-2xl transition-all duration-150 shadow-sm cursor-pointer flex items-center justify-center gap-2 font-heading">
+        <span id="biggerBtnIcon"><i class="fa-solid fa-expand text-violet-600"></i></span>
+        <span id="biggerBtnText">Make Calculator Bigger</span>
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- Enriched Tutored Mathematical Help Overlay with BIG OPTION B VIEWS (Super-Enlarged for Clear Viewing) -->
+  <div id="helpOverlay" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex flex-col items-center justify-center p-2 md:p-4">
+    <div class="max-w-7xl w-[96vw] h-[95vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-4 md:p-8 flex flex-col shadow-2xl relative overflow-hidden text-slate-800 dark:text-slate-100 font-sans">
+      
+      <!-- Header Row -->
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-4 z-10 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center text-lg shadow-sm">
+            <i class="fa-solid fa-book-atlas"></i>
+          </div>
+          <div>
+            <h2 class="text-3xl font-extrabold font-heading text-slate-900 dark:text-slate-100">Ebenslator Math & Engineering Subject Atlas</h2>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Step-by-step tutoring, formulas, explanations, and immediate interactive solver examples</p>
+          </div>
+        </div>
+        <button id="closeHelpBtn" class="p-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-xl transition-colors cursor-pointer shadow-sm">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Search and Filters bar -->
+      <div class="relative mb-6 z-10 shrink-0 font-code">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+        <input 
+          type="text" 
+          id="topicSearch" 
+          placeholder="Type keywords (e.g. Calculus, Topology, Abstract Algebra, Number Theory, Discrete Math...)" 
+          class="w-full bg-slate-55 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:border-emerald-500 rounded-2xl py-3.5 pl-12 pr-4 text-sm focus:outline-none transition-all shadow-sm font-code"
+        />
+      </div>
+
+      <!-- Split Container: Topics List (Left) and Large Educational Panel (Right) -->
+      <div class="flex-grow grid grid-cols-1 md:grid-cols-12 gap-6 overflow-hidden z-10 font-sans">
+        
+        <!-- Left Side: Interactive Topic list -->
+        <div class="md:col-span-4 flex flex-col gap-2 overflow-y-auto pr-1 text-left" id="topicsContainer">
+          <!-- Topics will render dynamically here -->
+        </div>
+
+        <!-- Right Side: Large tutoring & explanation display panel with MUCH LARGER AND CLEARER FONT SIZES (GIGANTIC FOR EASY VIEWING) -->
+        <div class="md:col-span-8 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-2xl p-6 overflow-y-auto flex flex-col justify-between shadow-inner text-left font-sans" id="topicDetailPanel">
+          <div class="text-center py-20 text-slate-500" id="topicPlaceholder">
+            <i class="fa-solid fa-hand-pointer text-5xl mb-4 text-slate-400"></i>
+            <h3 class="text-2xl font-bold">Select a Topic to Start Tutoring</h3>
+            <p class="text-sm max-w-sm mx-auto mt-1">Get precise step-by-step notations, detailed engineering explanations, examples, and try inputs immediately.</p>
+          </div>
+
+          <!-- Selected Topic Content with BIGGER visible text sizes (Option B super-enlarged) -->
+          <div id="topicSelectedContent" class="hidden space-y-8 animate-fade-in font-sans">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-850 pb-4">
+              <h3 id="topicDetailTitle" class="text-3xl md:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 font-heading">---</h3>
+              <span id="topicDetailCategory" class="px-3.5 py-1 bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300 text-xs font-extrabold uppercase rounded-md border border-violet-200 dark:border-violet-800">CATEGORY</span>
+            </div>
+
+            <div class="space-y-4">
+              <h4 class="text-base font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest font-heading">Subject Explanation & Comprehensive Step-by-Step Tutorial</h4>
+              <p id="topicDetailDesc" class="text-lg md:text-xl text-slate-900 dark:text-slate-100 leading-relaxed font-semibold">---</p>
+            </div>
+
+            <div class="space-y-4">
+              <h4 class="text-base font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest font-heading">Engineering Representation & Symbolic Math Formula Structure</h4>
+              <p id="topicDetailLogic" class="text-base md:text-lg text-slate-800 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 font-code shadow-md font-semibold">---</p>
+            </div>
+
+            <div class="space-y-4">
+              <h4 class="text-base font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest font-heading">How to input standard expression in Ebenslator:</h4>
+              <div class="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-between gap-4 shadow-md font-code">
+                <code id="topicDetailSyntax" class="text-xl md:text-2xl text-amber-600 dark:text-amber-400 font-bold font-code">---</code>
+                <button id="copySyntaxBtn" class="text-xs px-4 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl transition-all cursor-pointer whitespace-nowrap font-bold shadow-md">
+                  <i class="fa-regular fa-copy font-bold"></i> Copy Formula
+                </button>
+              </div>
+            </div>
+
+            <!-- Try-Me Trigger Section -->
+            <div class="pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-4">
+              <span class="text-sm text-slate-500 italic font-semibold">Clicking "Try in Calculator" loads and evaluates this example instantly.</span>
+              <button id="tryTopicInCalculatorBtn" class="px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 text-white font-extrabold text-base rounded-xl shadow-lg shadow-emerald-600/20 cursor-pointer flex items-center gap-2">
+                <i class="fa-solid fa-play animate-pulse"></i> Try in Calculator
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Interactive Fullscreen Adsterra Ad Overlay Container (70s Bypass Timer & Sandboxed strict redirect block) -->
+  <div id="adOverlay" class="fixed inset-0 z-50 bg-slate-950/95 flex flex-col items-center justify-center p-6 hidden animate-fade-in">
+    <!-- Ad Card Container (Increased top padding to house the absolute timer beautifully) -->
+    <div class="max-w-md w-full bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 pt-14 md:p-8 md:pt-16 shadow-2xl relative overflow-hidden text-center">
+      <!-- Glow decoration -->
+      <div class="absolute -top-12 -left-12 w-40 h-40 bg-violet-600/20 rounded-full blur-2xl"></div>
+      <div class="absolute -bottom-12 -right-12 w-40 h-40 bg-emerald-600/20 rounded-full blur-2xl"></div>
+
+      <!-- Prominent Pulsing Countdown Badge placed at top-left of the overlay card as requested -->
+      <div id="prominentTimerBadge" class="absolute top-4 left-4 px-3 py-1.5 bg-rose-500/25 border border-rose-500/30 rounded-xl text-rose-300 font-extrabold text-[11px] flex items-center gap-1.5 shadow-md z-20 animate-pulse">
+        <i class="fa-solid fa-hourglass-half text-[10px]"></i>
+        <span>Timer: <span id="overlayTimerCount" class="font-code text-xs text-white">70</span>s</span>
+      </div>
+
+      <!-- Sponsor Badge (Moved slightly rightwards to maintain symmetry with the left timer) -->
+      <span class="absolute top-4 right-4 px-2.5 py-1 bg-violet-500/10 text-violet-300 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-violet-500/20 font-sans">
+        SPONSOR AD
+      </span>
+
+      <!-- Close Sponsor Button (Replaces Sponsor Badge at same position after complete) -->
+      <button id="forceCloseAdBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-200 cursor-pointer p-1 rounded-lg hidden z-35 bg-slate-800 border border-slate-700 shadow-sm" title="Dismiss advertisement overlay">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <!-- Dynamic Adsterra Sandbox Container -->
+      <div class="my-6 p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col items-center w-full relative">
+        <!-- Sandboxed iframe strictly prevents top-level window redirects -->
+        <iframe id="adsterra-smart-link-frame" src="about:blank" class="w-full min-h-[160px] rounded-xl border border-slate-800 bg-slate-950" sandbox="allow-scripts allow-same-origin"></iframe>
+        
+        <!-- Premium Offer Button available during and after the countdown -->
+        <div class="w-full mt-4 z-10">
+          <a href="https://www.profitablecpmratenetwork.com/kj2rfg87?key=7826a8e7314ad9be47a0bba4a610ecd4" target="_blank" rel="noopener noreferrer" class="w-full py-4 px-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl transition-all duration-150 shadow-lg block text-center uppercase animate-pulse">
+            Click this button for a special offer<br>
+            <span class="text-[10px] text-emerald-300 font-normal normal-case font-sans">(complete the task and claim your ultimate price)</span>
+          </a>
+        </div>
+        
+        <div class="mt-4 px-3 py-1.5 bg-emerald-500/10 text-emerald-300 text-xs font-semibold rounded-lg border border-emerald-500/20 flex items-center gap-1.5 font-sans">
+          <i class="fa-solid fa-shield-halved"></i> Adsterra Secured Network Connection
+        </div>
+      </div>
+
+      <!-- Live timer / action button section -->
+      <div class="flex flex-col items-center gap-3 w-full">
+        <p class="text-xs text-slate-500 font-sans hidden" id="adTimerMsg">You can close this sponsorship in 70 seconds</p>
+        
+        <button id="skipAdBtn" disabled class="w-full py-3.5 bg-slate-800 text-slate-500 font-bold rounded-xl border border-slate-700 transition-all duration-300 flex items-center justify-center gap-2 cursor-not-allowed shadow-md font-sans">
+          <span id="skipCountdownText">Please wait... 70s</span>
+          <i class="fa-solid fa-angles-right"></i>
+        </button>
+      </div>
+
+      <p class="text-[10px] text-slate-600 mt-4 leading-relaxed font-code font-semibold">
+        Ad sponsors trigger once every eight calculations to sustain high-precision analytical calculations. Zero external page redirects guaranteed.
+      </p>
+    </div>
+  </div>
+
+  <!-- Systematic Errors Disclaimer Modal -->
+  <div id="disclaimerOverlay" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-6 font-sans">
+    <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl relative text-center text-slate-800 dark:text-slate-100">
+      <!-- Close Button -->
+      <button id="forceCloseDisclaimerBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer p-1" title="Close disclaimer modal">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="w-12 h-12 rounded-full bg-violet-100 dark:bg-violet-950 text-violet-600 dark:text-violet-400 flex items-center justify-center mx-auto mb-4 text-xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h3 class="text-lg font-bold mb-2 text-slate-900 dark:text-slate-100 font-heading">Systematic Error Disclaimer</h3>
+      <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-code font-semibold">
+        Despite the calculator being modern there could be systematic errors but in the Ebenslator it is highly limited and rare.
+      </p>
+      <button id="closeDisclaimerBtn" class="mt-5 w-full py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl transition-all duration-150 cursor-pointer shadow">
+        I Understand
+      </button>
+    </div>
+  </div>
+
+  <!-- Offline History ledger drawer/modal -->
+  <div id="historyDrawer" class="fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm hidden transition-all duration-300 flex justify-end font-sans">
+    <!-- Sliding Sidebar body -->
+    <div class="w-full max-w-md h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-850 p-6 flex flex-col justify-between shadow-2xl relative text-slate-800 dark:text-slate-100">
+      <div>
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-4">
+          <h2 class="text-xl font-bold flex items-center gap-2">
+            <i class="fa-solid fa-receipt text-violet-600"></i> Local Calculation History
+          </h2>
+          <button id="closeHistoryBtn" class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-200 transition-colors cursor-pointer">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <!-- History Ledger List -->
+        <div id="historyListContainer" class="space-y-3 overflow-y-auto max-h-[70vh] pr-1">
+          <!-- Dynamic history lists injected here -->
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="border-t border-slate-200 dark:border-slate-800 pt-4 flex gap-3">
+        <button id="clearHistoryBtn" class="flex-grow py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-rose-50 hover:text-rose-600 font-bold text-xs rounded-xl border border-slate-200 dark:border-slate-700 transition-all duration-150 cursor-pointer text-center font-bold">
+          <i class="fa-regular fa-trash-can mr-1.5"></i> Clear Entire History
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="relative z-10 w-full py-8 mt-8 border-t border-slate-200 dark:border-slate-900 text-slate-500 bg-slate-100/50 dark:bg-slate-950/20 font-sans font-medium">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center gap-4">
+      <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
+        <span class="font-bold text-slate-700 dark:text-slate-300">Ebenslator</span>
+        <span>&copy; 2026. All rights reserved.</span>
+        <span class="text-violet-600 dark:text-violet-400 font-semibold font-heading">Owned and managed by Okwuanasor Ebenezer Onyekachukwu</span>
+      </div>
+      
+      <!-- Disclaimer Button Trigger -->
+      <button id="triggerDisclaimerBtn" class="px-3 py-1.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-[11px] text-slate-600 dark:text-slate-300 rounded-lg border border-slate-200 dark:border-slate-800 transition-all duration-150 cursor-pointer shadow-sm font-semibold">
+        Systematic Error Disclaimer
+      </button>
+
+      <div class="flex items-center gap-4 text-[11px]">
+        <a href="#calculator" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors font-code">Calculator</a>
+        <a href="#features" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors font-code">SEO Capabilities</a>
+        <a href="#terms" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors font-code font-bold text-emerald-500">Zero Redirect Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Logic -->
+  <script>
+    // Comprehensive dictionary of every requested math category (All ready, none in dev)
+    const MATH_TOPICS = [
+      // Basic Mathematics
+      { 
+        id: "counting", 
+        name: "Counting", 
+        category: "Basic Mathematics", 
+        desc: "The core element of arithmetic. Counting involves assigning numeric markers to items sequentially to determine set sizes.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Count 4 units sequentially.<br>• <em>How to type:</em> Press keys: `1` `+` `1` `+` `1` `+` `1` and click `=`.<br>• <em>Key identity:</em> `1` is the unit value digit, `+` is the arithmetic addition operator.<br>• <em>Result:</em> `4`.<br><br><strong>Example 2:</strong> Count up to 10 by twos.<br>• <em>How to type:</em> Press keys: `2` `+` `2` `+` `2` `+` `2` `+` `2` and click `=`.<br>• <em>Result:</em> `10`.<br><br><strong>Example 3:</strong> Count down from 5 to 3.<br>• <em>How to type:</em> Press keys: `5` `-` `1` `-` `1` and click `=`.<br>• <em>Result:</em> `3`.<br><br><strong>Example 4:</strong> Aggregate count of three sets of 5 units.<br>• <em>How to type:</em> Press keys: `5` `+` `5` `+` `5` and click `=`.<br>• <em>Result:</em> `15`.<br><br><strong>Example 5:</strong> Compute count of double zero baseline indices.<br>• <em>How to type:</em> Press keys: `0` `+` `0` and click `=`.<br>• <em>Result:</em> `0`.", 
+        logic: "Key meaning: `+` acts as an incrementor, summing individual counts to find total set sizes.", 
+        syntax: "1 + 1 + 1 + 1", 
+        example: "1 + 1 + 1 + 1" 
+      },
+      { 
+        id: "numbers", 
+        name: "Numbers", 
+        category: "Basic Mathematics", 
+        desc: "Mathematical objects used to count, measure, and label. Includes natural numbers, integers, decimals, and complex numbers.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Basic decimal number input.<br>• <em>How to type:</em> Press keys: `1` `2` `3` `4` `5` `.` `6` `7` and click `=`.<br>• <em>Key identity:</em> `.` is the decimal separator, separating whole numbers from fractions.<br>• <em>Result:</em> `12345.67`.<br><br><strong>Example 2:</strong> Negative rational integer representation.<br>• <em>How to type:</em> Press keys: `-` `9` `8` `7` and click `=`.<br>• <em>Result:</em> `-987`.<br><br><strong>Example 3:</strong> Fraction boundary ratio representation.<br>• <em>How to type:</em> Press keys: `2` `/` `5` and click `=`.<br>• <em>Result:</em> `0.4`.<br><br><strong>Example 4:</strong> Infinite decimal representation of irrational constant PI.<br>• <em>How to type:</em> Click `pi` button on scientific pad or write `pi` using A-Z tab.<br>• <em>Result:</em> `3.1415926535898`.<br><br><strong>Example 5:</strong> Euler's mathematical base constant value.<br>• <em>How to type:</em> Click `e` button on scientific tab.<br>• <em>Result:</em> `2.718281828459`. ", 
+        logic: "Key meaning: Numbers represent scalar values directly. Decimal dot `.` creates rational fractions.", 
+        syntax: "12345.67", 
+        example: "12345.67" 
+      },
+      { 
+        id: "number_names", 
+        name: "Number Names", 
+        category: "Basic Mathematics", 
+        desc: "Converting numeric figures into alphabetic naming expressions.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Inputting hundred baseline names.<br>• <em>How to type:</em> Press keys: `1` `0` `0` and click `=`.<br>• <em>Result:</em> `100`.<br><br><strong>Example 2:</strong> Representing thousands magnitude.<br>• <em>How to type:</em> Press keys: `1` `0` `0` `0` and click `=`.<br>• <em>Result:</em> `1000`.<br><br><strong>Example 3:</strong> Decimal fraction names.<br>• <em>How to type:</em> Press keys: `0` `.` `5` and click `=`.<br>• <em>Result:</em> `0.5`.<br><br><strong>Example 4:</strong> Million factor order names.<br>• <em>How to type:</em> Press keys: `1` `e` `6` and click `=`.<br>• <em>Result:</em> `1000000`.<br><br><strong>Example 5:</strong> Negative zero baseline numbers.<br>• <em>How to type:</em> Press keys: `-` `0` and click `=`.<br>• <em>Result:</em> `0`.", 
+        logic: "Process numeric scales directly using simple multipliers.", 
+        syntax: "100", 
+        example: "100" 
+      },
+      { 
+        id: "addition", 
+        name: "Addition", 
+        category: "Basic Mathematics", 
+        desc: "Combining multiple numeric collections into a single aggregate total value.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Basic addition of two integer numbers.<br>• <em>How to type:</em> Press keys: `4` `5` `6` `+` `7` `8` `9` and click `=`.<br>• <em>Key identity:</em> `+` is the addition operator, summing left and right numbers.<br>• <em>Result:</em> `1245`.<br><br><strong>Example 2:</strong> Accumulate negative integer offsets.<br>• <em>How to type:</em> Press keys: `-` `1` `5` `+` `2` `5` and click `=`.<br>• <em>Result:</em> `10`.<br><br><strong>Example 3:</strong> Decimal fraction addition.<br>• <em>How to type:</em> Press keys: `1` `.` `5` `+` `2` `.` `7` and click `=`.<br>• <em>Result:</em> `4.2`.<br><br><strong>Example 4:</strong> Multi-term cumulative summing.<br>• <em>How to type:</em> Press keys: `1` `+` `2` `+` `3` `+` `4` and click `=`.<br>• <em>Result:</em> `10`.<br><br><strong>Example 5:</strong> Standard mathematical constant additions.<br>• <em>How to type:</em> Press keys: `pi` `+` `pi` and click `=`.<br>• <em>Result:</em> `6.2831853071796`.", 
+        logic: "The `+` key joins values and increments totals.", 
+        syntax: "456 + 789", 
+        example: "456 + 789" 
+      },
+      { 
+        id: "subtraction", 
+        name: "Subtraction", 
+        category: "Basic Mathematics", 
+        desc: "Finding the difference between numbers. Taking away an amount from a starting total.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Simple integer subtraction.<br>• <em>How to type:</em> Press keys: `1` `0` `0` `0` `-` `4` `5` `6` and click `=`.<br>• <em>Key identity:</em> `-` is the subtraction operator, reducing left value by right value.<br>• <em>Result:</em> `544`.<br><br><strong>Example 2:</strong> Subtraction leading to a negative result.<br>• <em>How to type:</em> Press keys: `5` `0` `-` `1` `2` `0` and click `=`.<br>• <em>Result:</em> `-70`.<br><br><strong>Example 3:</strong> Decimal subtraction.<br>• <em>How to type:</em> Press keys: `1` `5` `.` `9` `-` `4` `.` `3` and click `=`.<br>• <em>Result:</em> `11.6`.<br><br><strong>Example 4:</strong> Subtracting negative integers (double negation).<br>• <em>How to type:</em> Press keys: `5` `-` `(` `-` `3` `)` and click `=`.<br>• <em>Result:</em> `8`.<br><br><strong>Example 5:</strong> Constant subtraction fractions.<br>• <em>How to type:</em> Press keys: `pi` `-` `3` and click `=`.<br>• <em>Result:</em> `0.14159265358979`.", 
+        logic: "The `-` key reduces the left operand by the right operand.", 
+        syntax: "1000 - 456", 
+        example: "1000 - 456" 
+      },
+      { 
+        id: "multiplication", 
+        name: "Multiplication", 
+        category: "Basic Mathematics", 
+        desc: "Scaling one number by another. Equivalent to repeated additions of a set value.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Multiplication of two integers.<br>• <em>How to type:</em> Press keys: `1` `2` `*` `1` `5` and click `=`.<br>• <em>Key identity:</em> `*` is the multiplication operator (replaces visual '×').<br>• <em>Result:</em> `180`.<br><br><strong>Example 2:</strong> Multiplying negative integers.<br>• <em>How to type:</em> Press keys: `-` `5` `*` `-` `6` and click `=`.<br>• <em>Result:</em> `30`.<br><br><strong>Example 3:</strong> Decimal multiplying factors.<br>• <em>How to type:</em> Press keys: `2` `.` `5` `*` `4` and click `=`.<br>• <em>Result:</em> `10`.<br><br><strong>Example 4:</strong> Multi-term multiplication sequence.<br>• <em>How to type:</em> Press keys: `2` `*` `3` `*` `4` and click `=`.<br>• <em>Result:</em> `24`.<br><br><strong>Example 5:</strong> Multiplier coefficient with circular constant pi.<br>• <em>How to type:</em> Press keys: `2` `*` `pi` and click `=`.<br>• <em>Result:</em> `6.2831853071796`.", 
+        logic: "Use the asterisk `*` key to execute scaling factor equations.", 
+        syntax: "12 * 15", 
+        example: "12 * 15" 
+      },
+      { 
+        id: "division", 
+        name: "Division", 
+        category: "Basic Mathematics", 
+        desc: "Splitting a total quantity into equal portions or subsets.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Dividing two perfect squares.<br>• <em>How to type:</em> Press keys: `1` `4` `4` `/` `1` `2` and click `=`.<br>• <em>Key identity:</em> `/` is the division operator (replaces visual '÷').<br>• <em>Result:</em> `12`.<br><br><strong>Example 2:</strong> Division leading to decimal fraction.<br>• <em>How to type:</em> Press keys: `5` `/` `2` and click `=`.<br>• <em>Result:</em> `2.5`.<br><br><strong>Example 3:</strong> Dividing negative numbers.<br>• <em>How to type:</em> Press keys: `-` `2` `0` `/` `5` and click `=`.<br>• <em>Result:</em> `-4`.<br><br><strong>Example 4:</strong> Multi-stage consecutive division.<br>• <em>How to type:</em> Press keys: `1` `0` `0` `/` `2` `/` `5` and click `=`.<br>• <em>Result:</em> `10`.<br><br><strong>Example 5:</strong> Dividing constant pi to obtain semi-circle radians.<br>• <em>How to type:</em> Press keys: `pi` `/` `2` and click `=`.<br>• <em>Result:</em> `1.5707963267949`.", 
+        logic: "Use the slash `/` key to partition left numbers by right divisors.", 
+        syntax: "144 / 12", 
+        example: "144 / 12" 
+      },
+      { 
+        id: "fractions", 
+        name: "Fractions", 
+        category: "Basic Mathematics", 
+        desc: "Representing numerical parts of a whole using numerator and denominator ratios.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Adding two basic fractions.<br>• <em>How to type:</em> Press keys: `3` `/` `4` `+` `1` `/` `2` and click `=`.<br>• <em>Key identity:</em> `/` acts as fractional boundaries. Precedence calculates divisions before additions.<br>• <em>Result:</em> `1.25`.<br><br><strong>Example 2:</strong> Multiplying fractions.<br>• <em>How to type:</em> Press keys: `(` `2` `/` `3` `)` `*` `(` `3` `/` `4` `)` and click `=`.<br>• <em>Result:</em> `0.5`.<br><br><strong>Example 3:</strong> Fraction division structures.<br>• <em>How to type:</em> Press keys: `(` `1` `/` `2` `)` `/` `(` `1` `/` `4` `)` and click `=`.<br>• <em>Result:</em> `2`.<br><br><strong>Example 4:</strong> Mixed number addition representation.<br>• <em>How to type:</em> Press keys: `2` `+` `1` `/` `3` and click `=`.<br>• <em>Result:</em> `2.3333333333333`.<br><br><strong>Example 5:</strong> Subtracting fractions from integer wholes.<br>• <em>How to type:</em> Press keys: `1` `-` `5` `/` `8` and click `=`.<br>• <em>Result:</em> `0.375`.", 
+        logic: "Brackets `(` and `)` are vital to group fraction segments correctly.", 
+        syntax: "3/4 + 1/2", 
+        example: "3/4 + 1/2" 
+      },
+      { 
+        id: "decimals", 
+        name: "Decimals", 
+        category: "Basic Mathematics", 
+        desc: "Extending numbers past whole values into base-10 fractional segments.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Multiplication of floats.<br>• <em>How to type:</em> Press keys: `3` `.` `1` `4` `1` `5` `9` `*` `2` `.` `5` and click `=`.<br>• <em>Key identity:</em> `.` is the decimal separator, separating whole numbers from fractions.<br>• <em>Result:</em> `7.853975`.<br><br><strong>Example 2:</strong> Float additions.<br>• <em>How to type:</em> Press keys: `0` `.` `0` `0` `2` `+` `0` `.` `0` `0` `8` and click `=`.<br>• <em>Result:</em> `0.01`.<br><br><strong>Example 3:</strong> Subtracting float values.<br>• <em>How to type:</em> Press keys: `1` `2` `.` `5` `-` `8` `.` `7` `5` and click `=`.<br>• <em>Result:</em> `3.75`.<br><br><strong>Example 4:</strong> Float divisions.<br>• <em>How to type:</em> Press keys: `1` `/` `0` `.` `2` `5` and click `=`.<br>• <em>Result:</em> `4`.<br><br><strong>Example 5:</strong> Raising decimal float to powers.<br>• <em>How to type:</em> Press keys: `0` `.` `5` `^` `2` and click `=`.<br>• <em>Result:</em> `0.25`.", 
+        logic: "Decimals use dot `.` inputs for fractional segments.", 
+        syntax: "3.14159 * 2.5", 
+        example: "3.14159 * 2.5" 
+      },
+      { 
+        id: "percentages", 
+        name: "Percentages", 
+        category: "Basic Mathematics", 
+        desc: "Representing numbers as fractions of 100.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Percentage multiplication factor.<br>• <em>How to type:</em> Press keys: `5` `0` `%` `*` `2` `0` `0` and click `=`.<br>• <em>Key identity:</em> `%` acts as modulo operator in math.js normally, so in percentages we write them as decimal divisions `/ 100`.<br>• <em>Result:</em> `100`.<br><br><strong>Example 2:</strong> Finding 20% of 1500.<br>• <em>How to type:</em> Press keys: `0` `.` `2` `0` `*` `1` `5` `0` `0` and click `=`.<br>• <em>Result:</em> `300`.<br><br><strong>Example 3:</strong> Adding 5% interest to a baseline of 200.<br>• <em>How to type:</em> Press keys: `2` `0` `0` `*` `1` `.` `0` `5` and click `=`.<br>• <em>Result:</em> `210`.<br><br><strong>Example 4:</strong> Finding ratio percentage equivalents.<br>• <em>How to type:</em> Press keys: `3` `/` `5` `*` `1` `0` `0` and click `=`.<br>• <em>Result:</em> `60`.<br><br><strong>Example 5:</strong> Subtracting 15% discount from 80.<br>• <em>How to type:</em> Press keys: `8` `0` `*` `(` `1` `-` `0` `.` `1` `5` `)` and click `=`.<br>• <em>Result:</em> `68`.", 
+        logic: "Fractions out of 100 should be specified using decimal representations for perfect precision.", 
+        syntax: "0.50 * 200", 
+        example: "0.50 * 200" 
+      },
+      { 
+        id: "ratios", 
+        name: "Ratios", 
+        category: "Basic Mathematics", 
+        desc: "Comparing the relative sizes of two or more quantities.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Basic division of relative metrics.<br>• <em>How to type:</em> Press keys: `1` `5` `/` `5` and click `=`.<br>• <em>Key identity:</em> `/` divides quantities to establish scale factors.<br>• <em>Result:</em> `3`.<br><br><strong>Example 2:</strong> Scale down 80 to 20 ratio.<br>• <em>How to type:</em> Press keys: `8` `0` `/` `2` `0` and click `=`.<br>• <em>Result:</em> `4`.<br><br><strong>Example 3:</strong> Rational float ratio scales.<br>• <em>How to type:</em> Press keys: `1` `.` `2` `/` `0` `.` `3` and click `=`.<br>• <em>Result:</em> `4`.<br><br><strong>Example 4:</strong> Multi-term ratio fraction multipliers.<br>• <em>How to type:</em> Press keys: `(` `3` `/` `4` `)` `*` `1` `2` and click `=`.<br>• <em>Result:</em> `9`.<br><br><strong>Example 5:</strong> Ratio of circular coordinates.<br>• <em>How to type:</em> Press keys: `2` `*` `pi` `/` `pi` and click `=`.<br>• <em>Result:</em> `2`.", 
+        logic: "Ratios utilize division `/` parameters to calculate scale coefficients.", 
+        syntax: "15 / 5", 
+        example: "15 / 5" 
+      },
+      { 
+        id: "proportion", 
+        name: "Proportion", 
+        category: "Basic Mathematics", 
+        desc: "Stating that two ratios are mathematically equivalent.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Verifying proportion equivalence.<br>• <em>How to type:</em> Press keys: `3` `/` `4` `==` `6` `/` `8` and click `=`.<br>• <em>Key identity:</em> `==` checks relational equivalence state.<br>• <em>Result:</em> `true`.<br><br><strong>Example 2:</strong> Verifying non-proportion inequalities.<br>• <em>How to type:</em> Press keys: `1` `/` `2` `==` `3` `/` `5` and click `=`.<br>• <em>Result:</em> `false`.<br><br><strong>Example 3:</strong> Solving proportions algebraically.<br>• <em>How to type:</em> Press keys: `(` `6` `*` `4` `)` `/` `3` and click `=`.<br>• <em>Result:</em> `8`.<br><br><strong>Example 4:</strong> Proportional scale multiplier calculations.<br>• <em>How to type:</em> Press keys: `1` `0` `*` `(` `5` `/` `2` `)` and click `=`.<br>• <em>Result:</em> `25`.<br><br><strong>Example 5:</strong> Proportional coordinate matches.<br>• <em>How to type:</em> Press keys: `1` `/` `3` `==` `5` `/` `1` `5` and click `=`.<br>• <em>Result:</em> `true`.", 
+        logic: "Formulate proportion equivalence checks using relational keys `==`.", 
+        syntax: "3/4 == 6/8", 
+        example: "3/4 == 6/8" 
+      },
+      { 
+        id: "factors", 
+        name: "Factors", 
+        category: "Basic Mathematics", 
+        desc: "Numbers that divide exactly into another number without remainder.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Greatest Common Divisor of 12 and 18.<br>• <em>How to type:</em> Click `gcd` button on scientific tab, or write `gcd(12, 18)` using A-Z pad.<br>• <em>Key identity:</em> `gcd` computes highest common factors, commas separate terms.<br>• <em>Result:</em> `6`.<br><br><strong>Example 2:</strong> GCD of 3 primes.<br>• <em>How to type:</em> Enter `gcd(17, 23, 29)`. <br>• <em>Result:</em> `1`.<br><br><strong>Example 3:</strong> Finding factors of large squares.<br>• <em>How to type:</em> Enter `gcd(100, 250)`. <br>• <em>Result:</em> `50`.<br><br><strong>Example 4:</strong> Finding common factors of consecutive multiples.<br>• <em>How to type:</em> Enter `gcd(15, 30, 45)`. <br>• <em>Result:</em> `15`.<br><br><strong>Example 5:</strong> Prime factor bounds.<br>• <em>How to type:</em> Enter `gcd(81, 27)`. <br>• <em>Result:</em> `27`.", 
+        logic: "GCD function isolates common factors across multiple values.", 
+        syntax: "gcd(12, 18)", 
+        example: "gcd(12, 18)" 
+      },
+      { 
+        id: "multiples", 
+        name: "Multiples", 
+        category: "Basic Mathematics", 
+        desc: "Numbers generated by multiplying a given integer by other whole numbers.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Least Common Multiple of 4 and 6.<br>• <em>How to type:</em> Click `lcm` or type `lcm(4, 6)` using keypad tabs.<br>• <em>Key identity:</em> `lcm` isolates lowest common multiple grids, arguments in parenthesis `(` `)`.<br>• <em>Result:</em> `12`.<br><br><strong>Example 2:</strong> LCM of prime factors.<br>• <em>How to type:</em> Enter `lcm(3, 5, 7)`. <br>• <em>Result:</em> `105`.<br><br><strong>Example 3:</strong> LCM of decimal fraction scale bases.<br>• <em>How to type:</em> Enter `lcm(10, 25)`. <br>• <em>Result:</em> `50`.<br><br><strong>Example 4:</strong> Low multiple of consecutive squares.<br>• <em>How to type:</em> Enter `lcm(9, 12)`. <br>• <em>Result:</em> `36`.<br><br><strong>Example 5:</strong> Large multiple bounds.<br>• <em>How to type:</em> Enter `lcm(12, 15, 20)`. <br>• <em>Result:</em> `60`.", 
+        logic: "LCM finds the lowest common multiple among arguments.", 
+        syntax: "lcm(4, 6)", 
+        example: "lcm(4, 6)" 
+      },
+      { 
+        id: "integers", 
+        name: "Integers", 
+        category: "Basic Mathematics", 
+        desc: "A set of whole numbers, including positive, negative, and zero.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Negative integer scalar multiplication.<br>• <em>How to type:</em> Press keys: `-` `5` `*` `1` `0` and click `=`.<br>• <em>Key identity:</em> `-` represents the sign indicator when placed before a digit.<br>• <em>Result:</em> `-50`.<br><br><strong>Example 2:</strong> Multiplying negative integers (double negation).<br>• <em>How to type:</em> Press keys: `-` `3` `*` `-` `1` `2` and click `=`.<br>• <em>Result:</em> `36`.<br><br><strong>Example 3:</strong> Adding negative integers.<br>• <em>How to type:</em> Press keys: `-` `1` `0` `+` `-` `2` `5` and click `=`.<br>• <em>Result:</em> `-35`.<br><br><strong>Example 4:</strong> Integer absolute subtraction bounds.<br>• <em>How to type:</em> Press keys: `abs(` `-` `1` `0` `0` `)` and click `=`.<br>• <em>Result:</em> `100`.<br><br><strong>Example 5:</strong> Multiplying zero by negative integers.<br>• <em>How to type:</em> Press keys: `0` `*` `-` `4` `5` and click `=`.<br>• <em>Result:</em> `0`.", 
+        logic: "Computes operations cleanly across negative, positive, and zero bounds.", 
+        syntax: "-5 * 10", 
+        example: "-5 * 10" 
+      },
+      { 
+        id: "place_value", 
+        name: "Place Value", 
+        category: "Basic Mathematics", 
+        desc: "Determining digit scale values based on position in decimal configurations.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Isolate hundreds and tens places.<br>• <em>How to type:</em> Press keys: `4` `e` `3` `+` `5` `e` `2` and click `=`.<br>• <em>Key identity:</em> `e` represents standard exponent notation base 10.<br>• <em>Result:</em> `4500`.<br><br><strong>Example 2:</strong> Scientific exponent multiplier scales.<br>• <em>How to type:</em> Press keys: `1` `.` `2` `e` `5` and click `=`.<br>• <em>Result:</em> `120000`.<br><br><strong>Example 3:</strong> Small decimal place positions.<br>• <em>How to type:</em> Press keys: `5` `e` `-` `3` and click `=`.<br>• <em>Result:</em> `0.005`.<br><br><strong>Example 4:</strong> Expressing tens value positions.<br>• <em>How to type:</em> Press keys: `7` `*` `1` `0` `^` `1` and click `=`.<br>• <em>Result:</em> `70`.<br><br><strong>Example 5:</strong> Large scale billion place values.<br>• <em>How to type:</em> Press keys: `2` `.` `5` `e` `9` and click `=`.<br>• <em>Result:</em> `2500000000`.", 
+        logic: "Uses `e` exponent notation keys to represent place scales accurately.", 
+        syntax: "4e3 + 5e2", 
+        example: "4e3 + 5e2" 
+      },
+      { 
+        id: "estimation", 
+        name: "Estimation", 
+        category: "Basic Mathematics", 
+        desc: "Finding approximate numeric answers to solve expressions quickly.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Estimate products of float decimals.<br>• <em>How to type:</em> Press keys: `round(` `4` `.` `8` `)` `*` `round(` `5` `.` `2` `)` and click `=`.<br>• <em>Key identity:</em> `round` rounds arguments, `*` multiplies estimates.<br>• <em>Result:</em> `25`.<br><br><strong>Example 2:</strong> Estimating additions of sums.<br>• <em>How to type:</em> Enter `round(10.1) + round(19.9)`. <br>• <em>Result:</em> `30`.<br><br><strong>Example 3:</strong> Estimating ratio quotients.<br>• <em>How to type:</em> Enter `round(9.8 / 2.1)`. <br>• <em>Result:</em> `5`.<br><br><strong>Example 4:</strong> Rounded estimations of complex roots.<br>• <em>How to type:</em> Enter `round(sqrt(50))`. <br>• <em>Result:</em> `7`.<br><br><strong>Example 5:</strong> Cumulative round bounds.<br>• <em>How to type:</em> Enter `round(pi * 3)`. <br>• <em>Result:</em> `9`.", 
+        logic: "Use the `round()` wrapper to determine close estimations.", 
+        syntax: "round(4.8) * round(5.2)", 
+        example: "round(4.8) * round(5.2)" 
+      },
+      { 
+        id: "rounding", 
+        name: "Rounding", 
+        category: "Basic Mathematics", 
+        desc: "Modifying a value to the nearest representing integer or decimal position.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Rounding float to nearest 2 decimal places.<br>• <em>How to type:</em> Type: `round(3.579, 2)` and click `=`.<br>• <em>Key identity:</em> Commas separate the rounding value from the precision scale digits.<br>• <em>Result:</em> `3.58`.<br><br><strong>Example 2:</strong> Rounding float upwards.<br>• <em>How to type:</em> Type: `ceil(4.1)` and click `=`.<br>• <em>Result:</em> `5`.<br><br><strong>Example 3:</strong> Rounding float downwards.<br>• <em>How to type:</em> Type: `floor(4.9)` and click `=`.<br>• <em>Result:</em> `4`.<br><br><strong>Example 4:</strong> Rounding constant pi bounds.<br>• <em>How to type:</em> Type: `round(pi, 4)` and click `=`.<br>• <em>Result:</em> `3.1416`.<br><br><strong>Example 5:</strong> Rounding negative coordinates.<br>• <em>How to type:</em> Type: `round(-2.4)` and click `=`.<br>• <em>Result:</em> `-2`.", 
+        logic: "Use `round`, `floor`, or `ceil` functions to modify float scales.", 
+        syntax: "round(3.579, 2)", 
+        example: "round(3.579, 2)" 
+      },
+      { 
+        id: "measurement", 
+        name: "Measurement", 
+        category: "Basic Mathematics", 
+        desc: "Quantifying geometric physical attributes like length, weight, area, and temperature.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Converting meters to centimeters.<br>• <em>How to type:</em> Press keys: `5` `m` `SPACE` `t` `o` `SPACE` `c` `m` and click `=`.<br>• <em>Key identity:</em> `to` is the measurement conversion operator in math.js.<br>• <em>Result:</em> `500 cm`.<br><br><strong>Example 2:</strong> Converting temperature scales.<br>• <em>How to type:</em> Enter `100 degC to degF`. <br>• <em>Result:</em> `212 degF`.<br><br><strong>Example 3:</strong> Converting weight parameters.<br>• <em>How to type:</em> Enter `1 kg to lb`. <br>• <em>Result:</em> `2.20462 lb`.<br><br><strong>Example 4:</strong> Volume parameter conversion.<br>• <em>How to type:</em> Enter `1 l to gal`. <br>• <em>Result:</em> `0.264172 gal`.<br><br><strong>Example 5:</strong> Speed conversions.<br>• <em>How to type:</em> Enter `60 mph to km/h`. <br>• <em>Result:</em> `96.5606 km/h`.", 
+        logic: "Conversions map dimensional physical parameters natively using `to` keyword.", 
+        syntax: "5 m to cm", 
+        example: "5 m to cm" 
+      },
+      { 
+        id: "time", 
+        name: "Time", 
+        category: "Basic Mathematics", 
+        desc: "Quantifying durations and intervals across standard minute, hour, and day grids.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Convert hours to minutes.<br>• <em>How to type:</em> Type: `2.5 hours to minutes` and click `=`.<br>• <em>Key identity:</em> `to` acts as translation bounds, units are standard time names.<br>• <em>Result:</em> `150 minutes`.<br><br><strong>Example 2:</strong> Converting days to hours.<br>• <em>How to type:</em> Enter `7 days to hours`. <br>• <em>Result:</em> `168 hours`.<br><br><strong>Example 3:</strong> Converting seconds to minutes.<br>• <em>How to type:</em> Enter `300 seconds to minutes`. <br>• <em>Result:</em> `5 minutes`.<br><br><strong>Example 4:</strong> Converting minutes to hours.<br>• <em>How to type:</em> Enter `90 minutes to hours`. <br>• <em>Result:</em> `1.5 hours`.<br><br><strong>Example 5:</strong> Years to days conversions.<br>• <em>How to type:</em> Enter `2 years to days`. <br>• <em>Result:</em> `730.5 days`.", 
+        logic: "Standard time units (seconds, minutes, hours, days, years) convert accurately with `to` key.", 
+        syntax: "2.5 hours to minutes", 
+        example: "2.5 hours to minutes" 
+      },
+      { 
+        id: "money_math", 
+        name: "Money Mathematics", 
+        category: "Basic Mathematics", 
+        desc: "Interpreting currency calculations, interest accruals, percentages, and financial margins.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Calculate simple interest principal accrual.<br>• <em>How to type:</em> Press: `5` `0` `0` `0` `*` `0` `.` `0` `5` `*` `3` and click `=`.<br>• <em>Key identity:</em> `*` multiplies the principal sum with rate factor and time duration.<br>• <em>Result:</em> `750`.<br><br><strong>Example 2:</strong> Finding profit margins.<br>• <em>How to type:</em> Enter `(150 - 100) / 100 * 100`. <br>• <em>Result:</em> `50` (50% margin).<br><br><strong>Example 3:</strong> Estimating sales tax additions.<br>• <em>How to type:</em> Enter `1200 * 1.075`. <br>• <em>Result:</em> `1290`.<br><br><strong>Example 4:</strong> Calculating compounding growth.<br>• <em>How to type:</em> Enter `1000 * (1.05)^5`. <br>• <em>Result:</em> `1276.28`.<br><br><strong>Example 5:</strong> Splitting financial expenses.<br>• <em>How to type:</em> Enter `8500 / 4`. <br>• <em>Result:</em> `2125`.", 
+        logic: "Apply multipliers and division brackets to map finance models.", 
+        syntax: "5000 * 0.05 * 3", 
+        example: "5000 * 0.05 * 3" 
+      },
+      { 
+        id: "basic_word", 
+        name: "Basic Word Problems", 
+        category: "Basic Mathematics", 
+        desc: "Translating conversational text problems into algebraic formulas.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Subtracting product estimates from starting boundaries.<br>• <em>How to type:</em> Press keys: `2` `0` `-` `5` `*` `3` and click `=`.<br>• <em>Key identity:</em> Operation precedence ensures `*` is completed before `-`.<br>• <em>Result:</em> `5`.<br><br><strong>Example 2:</strong> Resolving sharing problems.<br>• <em>How to type:</em> Enter `(45 + 15) / 5`. <br>• <em>Result:</em> `12`.<br><br><strong>Example 3:</strong> Doubled distance aggregates.<br>• <em>How to type:</em> Enter `2 * (5 + 10)`. <br>• <em>Result:</em> `30`.<br><br><strong>Example 4:</strong> Calculating price balances.<br>• <em>How to type:</em> Enter `100 - (15 * 3 + 20)`. <br>• <em>Result:</em> `35`.<br><br><strong>Example 5:</strong> Scaling proportions in mixtures.<br>• <em>How to type:</em> Enter `(250 / 5) * 8`. <br>• <em>Result:</em> `400`.", 
+        logic: "Group conversational components using parenthetical brackets `(` and `)`.", 
+        syntax: "20 - 5 * 3", 
+        example: "20 - 5 * 3" 
+      },
+
+      // Elementary Geometry
+      { 
+        id: "shapes", 
+        name: "Shapes", 
+        category: "Elementary Geometry", 
+        desc: "Classifying visual geometric forms by boundary constraints, faces, and vertex coordinate networks.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Circular circumference scale.<br>• <em>How to type:</em> Press keys: `2` `*` `pi` `*` `5` and click `=`.<br>• <em>Key identity:</em> `pi` represents circular constant. `*` multiplies components.<br>• <em>Result:</em> `31.415926535898`.<br><br><strong>Example 2:</strong> Square boundary perimeter.<br>• <em>How to type:</em> Enter `4 * 10`. <br>• <em>Result:</em> `40`.<br><br><strong>Example 3:</strong> Trapezoid area calculation.<br>• <em>How to type:</em> Enter `0.5 * (6 + 10) * 4`. <br>• <em>Result:</em> `32`.<br><br><strong>Example 4:</strong> Triangle diagonal distance.<br>• <em>How to type:</em> Enter `sqrt(3^2 + 4^2)`. <br>• <em>Result:</em> `5`.<br><br><strong>Example 5:</strong> Cube surface face count multipliers.<br>• <em>How to type:</em> Enter `6 * 5^2`. <br>• <em>Result:</em> `150`.", 
+        logic: "Compute perimeter and face dimensions utilizing geometry formulas.", 
+        syntax: "2 * pi * 5", 
+        example: "2 * pi * 5" 
+      },
+      { 
+        id: "lines", 
+        name: "Lines", 
+        category: "Elementary Geometry", 
+        desc: "Infinite straight path configurations connecting point clusters.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Linear coordinate slope position.<br>• <em>How to type:</em> Press keys: `3` `*` `2` `+` `5` and click `=`.<br>• <em>Key identity:</em> Multiplies coordinate slope with independent variables before adding offsets.<br>• <em>Result:</em> `11`.<br><br><strong>Example 2:</strong> Finding slopes from coordinates.<br>• <em>How to type:</em> Enter `(15 - 5) / (4 - 2)`. <br>• <em>Result:</em> `5`.<br><br><strong>Example 3:</strong> Midpoint coordinate calculation.<br>• <em>How to type:</em> Enter `[(2 + 8)/2, (5 + 15)/2]`. <br>• <em>Result:</em> `[5, 10]`.<br><br><strong>Example 4:</strong> Distance coordinate length scale.<br>• <em>How to type:</em> Enter `sqrt((10-2)^2 + (12-6)^2)`. <br>• <em>Result:</em> `10`.<br><br><strong>Example 5:</strong> Parallel intercept offsets.<br>• <em>How to type:</em> Enter `2 * 5 - 3`. <br>• <em>Result:</em> `7`.", 
+        logic: "Map lines using the standard slope intercept equation format y = mx + c.", 
+        syntax: "3 * 2 + 5", 
+        example: "3 * 2 + 5" 
+      },
+      { 
+        id: "angles", 
+        name: "Angles", 
+        category: "Elementary Geometry", 
+        desc: "The rotational deviation space measured between two intersecting straight lines.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Angle conversion from degrees to radians.<br>• <em>How to type:</em> Press: `9` `0` `SPACE` `d` `e` `g` `SPACE` `t` `o` `SPACE` `r` `a` `d` and click `=`.<br>• <em>Key identity:</em> `to` translates unit configurations, `deg` and `rad` represent target units.<br>• <em>Result:</em> `1.5707963267949 rad`.<br><br><strong>Example 2:</strong> Radians to degrees conversion.<br>• <em>How to type:</em> Enter `pi / 4 to deg`. <br>• <em>Result:</em> `45 deg`.<br><br><strong>Example 3:</strong> Complementary angle offsets.<br>• <em>How to type:</em> Enter `90 - 45`. <br>• <em>Result:</em> `45`.<br><br><strong>Example 4:</strong> Supplementary angle offsets.<br>• <em>How to type:</em> Enter `180 - 120`. <br>• <em>Result:</em> `60`.<br><br><strong>Example 5:</strong> Interior regular pentagon angles.<br>• <em>How to type:</em> Enter `(5 - 2) * 180 / 5`. <br>• <em>Result:</em> `108`.", 
+        logic: "Solve angle structures using unit translations of degrees and radians.", 
+        syntax: "90 deg to rad", 
+        example: "90 deg to rad" 
+      },
+      { 
+        id: "triangles", 
+        name: "Triangles", 
+        category: "Elementary Geometry", 
+        desc: "Three-sided planar polygons whose interior angles sum to 180 degrees.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Base-height area model.<br>• <em>How to type:</em> Press keys: `0` `.` `5` `*` `1` `0` `*` `8` and click `=`.<br>• <em>Key identity:</em> `0.5` represents half factor, multiplying base and height dimensions.<br>• <em>Result:</em> `40`.<br><br><strong>Example 2:</strong> Pythagorean hypotenuse calculation.<br>• <em>How to type:</em> Enter `sqrt(5^2 + 12^2)`. <br>• <em>Result:</em> `13`.<br><br><strong>Example 3:</strong> Heron's triangle area formula.<br>• <em>How to type:</em> Enter `sqrt(12 * (12-5) * (12-8) * (12-11))`. <br>• <em>Result:</em> `18.3303`.<br><br><strong>Example 4:</strong> Finding unknown angle properties.<br>• <em>How to type:</em> Enter `180 - 60 - 45`. <br>• <em>Result:</em> `75`.<br><br><strong>Example 5:</strong> Perimeter summation of sides.<br>• <em>How to type:</em> Enter `5 + 8 + 11`. <br>• <em>Result:</em> `24`.", 
+        logic: "Resolve triangle properties utilizing area and trigonometry equations.", 
+        syntax: "0.5 * 10 * 8", 
+        example: "0.5 * 10 * 8" 
+      },
+      { 
+        id: "quadrilaterals", 
+        name: "Quadrilaterals", 
+        category: "Elementary Geometry", 
+        desc: "Four-sided planar shapes, including squares, rectangles, trapezoids, and rhombuses.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Rectangle planar area.<br>• <em>How to type:</em> Press keys: `1` `2` `*` `8` and click `=`.<br>• <em>Key identity:</em> Multiplies adjacent side coordinates.<br>• <em>Result:</em> `96`.<br><br><strong>Example 2:</strong> Perimeter of a parallelogram.<br>• <em>How to type:</em> Enter `2 * (10 + 15)`. <br>• <em>Result:</em> `50`.<br><br><strong>Example 3:</strong> Trapezoid midline length scale.<br>• <em>How to type:</em> Enter `(12 + 18) / 2`. <br>• <em>Result:</em> `15`.<br><br><strong>Example 4:</strong> Rhombus area from diagonals.<br>• <em>How to type:</em> Enter `0.5 * 12 * 16`. <br>• <em>Result:</em> `96`.<br><br><strong>Example 5:</strong> Interior angle verification.<br>• <em>How to type:</em> Enter `360 - (90 + 90 + 110)`. <br>• <em>Result:</em> `70`.", 
+        logic: "Apply multipliers to calculate area and boundaries of quadrilaterals.", 
+        syntax: "12 * 8", 
+        example: "12 * 8" 
+      },
+      { 
+        id: "polygons", 
+        name: "Polygons", 
+        category: "Elementary Geometry", 
+        desc: "Multi-sided planar geometric shapes bounded by closed straight segments.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Total regular polygon interior angles sum.<br>• <em>How to type:</em> Press keys: `(` `6` `-` `2` `)` `*` `1` `8` `0` and click `=`.<br>• <em>Key identity:</em> Subtracts 2 from side count before multiplying by supplementary angle baseline.<br>• <em>Result:</em> `720`.<br><br><strong>Example 2:</strong> Hexagon individual angle.<br>• <em>How to type:</em> Enter `(6 - 2) * 180 / 6`. <br>• <em>Result:</em> `120`.<br><br><strong>Example 3:</strong> Exterior angle of an octagon.<br>• <em>How to type:</em> Enter `360 / 8`. <br>• <em>Result:</em> `45`.<br><br><strong>Example 4:</strong> Regular decagon total angles.<br>• <em>How to type:</em> Enter `(10 - 2) * 180`. <br>• <em>Result:</em> `1440`.<br><br><strong>Example 5:</strong> Diagonals count in a heptagon.<br>• <em>How to type:</em> Enter `(7 * (7 - 3)) / 2`. <br>• <em>Result:</em> `14`.", 
+        logic: "Calculate interior sums utilizing regular polygon formulas.", 
+        syntax: "(6 - 2) * 180", 
+        example: "(6 - 2) * 180" 
+      },
+      { 
+        id: "circles", 
+        name: "Circles", 
+        category: "Elementary Geometry", 
+        desc: "Planar curves where all bounding points are equidistant from a central coordinate.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Circle area from radius coordinate.<br>• <em>How to type:</em> Press keys: `pi` `*` `5` `^` `2` and click `=`.<br>• <em>Key identity:</em> `^` raises the radius parameter to power index 2, multiplying with pi.<br>• <em>Result:</em> `78.5398163397448`.<br><br><strong>Example 2:</strong> Semicircle perimeter bounds.<br>• <em>How to type:</em> Enter `pi * 10 + 2 * 10`. <br>• <em>Result:</em> `51.4159`.<br><br><strong>Example 3:</strong> Sector area calculation.<br>• <em>How to type:</em> Enter `(60 / 360) * pi * 6^2`. <br>• <em>Result:</em> `18.8495`.<br><br><strong>Example 4:</strong> Circle diameter from area.<br>• <em>How to type:</em> Enter `2 * sqrt(50 / pi)`. <br>• <em>Result:</em> `7.9788`.<br><br><strong>Example 5:</strong> Chord length approximation.<br>• <em>How to type:</em> Enter `2 * 5 * sin(45 deg)`. <br>• <em>Result:</em> `7.071`.", 
+        logic: "Uses pi constant in equations to resolve circular boundaries.", 
+        syntax: "pi * 5^2", 
+        example: "pi * 5^2" 
+      },
+      { 
+        id: "symmetry", 
+        name: "Symmetry", 
+        category: "Elementary Geometry", 
+        desc: "Balanced proportions across mirror axes or rotational orientations.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Negate coordinate to find reflective symmetry axis.<br>• <em>How to type:</em> Press keys: `[` `-` `3` `,` `4` `]` `*` `-` `1` and click `=`.<br>• <em>Key identity:</em> Matrices in brackets `[` `]` multiplied by `-1` rotate coordinates around origin.<br>• <em>Result:</em> `[3, -4]`.<br><br><strong>Example 2:</strong> Symmetry reflection over Y-axis.<br>• <em>How to type:</em> Enter `[-1, 1] * [5, 10]`. <br>• <em>Result:</em> `[-5, 10]`.<br><br><strong>Example 3:</strong> Symmetry reflection over X-axis.<br>• <em>How to type:</em> Enter `[1, -1] * [5, 10]`. <br>• <em>Result:</em> `[5, -10]`.<br><br><strong>Example 4:</strong> Point inversion calculation.<br>• <em>How to type:</em> Enter `-1 * [12, -8]`. <br>• <em>Result:</em> `[-12, 8]`.<br><br><strong>Example 5:</strong> Scale symmetry vector bounds.<br>• <em>How to type:</em> Enter `0.5 * [10, 20]`. <br>• <em>Result:</em> `[5, 10]`.", 
+        logic: "Evaluate reflective symmetric vector coordinates algebraically.", 
+        syntax: "[-3, 4] * -1", 
+        example: "[-3, 4] * -1" 
+      },
+      { 
+        id: "area", 
+        name: "Area", 
+        category: "Elementary Geometry", 
+        desc: "Quantifying two-dimensional bounded spatial planes.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Rectangle area from side inputs.<br>• <em>How to type:</em> Press keys: `8` `*` `1` `5` and click `=`.<br>• <em>Key identity:</em> `*` scales length width parameters.<br>• <em>Result:</em> `120`.<br><br><strong>Example 2:</strong> Triangle area using height.<br>• <em>How to type:</em> Enter `0.5 * 12 * 7`. <br>• <em>Result:</em> `42`.<br><br><strong>Example 3:</strong> Parallelogram area base product.<br>• <em>How to type:</em> Enter `15 * 8`. <br>• <em>Result:</em> `120`.<br><br><strong>Example 4:</strong> Circle area calculation.<br>• <em>How to type:</em> Enter `pi * 3.5^2`. <br>• <em>Result:</em> `38.4845`.<br><br><strong>Example 5:</strong> Area of annulus ring bounds.<br>• <em>How to type:</em> Enter `pi * (10^2 - 6^2)`. <br>• <em>Result:</em> `201.0619`.", 
+        logic: "Two-dimensional bounds are calculated utilizing multiplication structures.", 
+        syntax: "8 * 15", 
+        example: "8 * 15" 
+      },
+      { 
+        id: "perimeter", 
+        name: "Perimeter", 
+        category: "Elementary Geometry", 
+        desc: "The continuous outer boundary length enclosing a two-dimensional space.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Perpendicular perimeter of rectangles.<br>• <em>How to type:</em> Press keys: `2` `*` `(` `1` `0` `+` `1` `5` `)` and click `=`.<br>• <em>Key identity:</em> Grouping brackets sums adjacent sides before doubling total.<br>• <em>Result:</em> `50`.<br><br><strong>Example 2:</strong> Regular hexagon perimeter.<br>• <em>How to type:</em> Enter `6 * 12`. <br>• <em>Result:</em> `72`.<br><br><strong>Example 3:</strong> Semicircular perimeter boundary.<br>• <em>How to type:</em> Enter `pi * 5 + 10`. <br>• <em>Result:</em> `25.7079`.<br><br><strong>Example 4:</strong> Pentagon perimeter scale.<br>• <em>How to type:</em> Enter `5 * 8.5`. <br>• <em>Result:</em> `42.5`.<br><br><strong>Example 5:</strong> Summing irregular triangle borders.<br>• <em>How to type:</em> Enter `12 + 15 + 18`. <br>• <em>Result:</em> `45`.", 
+        logic: "Calculates total border values by accumulating outer border sides.", 
+        syntax: "2 * (10 + 15)", 
+        example: "2 * (10 + 15)" 
+      },
+      { 
+        id: "volume", 
+        name: "Volume", 
+        category: "Elementary Geometry", 
+        desc: "Quantifying three-dimensional occupied spatial capacity.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Cylinder three-dimensional volume.<br>• <em>How to type:</em> Press keys: `pi` `*` `3` `^` `2` `*` `1` `0` and click `=`.<br>• <em>Key identity:</em> Area base coordinates multiplied by height dimension parameters.<br>• <em>Result:</em> `282.743338823081`.<br><br><strong>Example 2:</strong> Sphere volume bounds.<br>• <em>How to type:</em> Enter `(4 / 3) * pi * 5^3`. <br>• <em>Result:</em> `523.598`.<br><br><strong>Example 3:</strong> Rectangular prism capacity.<br>• <em>How to type:</em> Enter `4 * 5 * 10`. <br>• <em>Result:</em> `200`.<br><br><strong>Example 4:</strong> Cone volume approximation.<br>• <em>How to type:</em> Enter `(1 / 3) * pi * 3^2 * 12`. <br>• <em>Result:</em> `113.0973`.<br><br><strong>Example 5:</strong> Pyramid square base volume.<br>• <em>How to type:</em> Enter `(1 / 3) * 6^2 * 10`. <br>• <em>Result:</em> `120`.", 
+        logic: "Isolates solid space counts by executing volumetric equations.", 
+        syntax: "pi * 3^2 * 10", 
+        example: "pi * 3^2 * 10" 
+      },
+      { 
+        id: "surface_area", 
+        name: "Surface Area", 
+        category: "Elementary Geometry", 
+        desc: "The total outer boundary surface area of a three-dimensional solid.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Cylinder complete surface area.<br>• <em>How to type:</em> Press: `2` `*` `pi` `*` `3` `*` `1` `0` `+` `2` `*` `pi` `*` `3` `^` `2` and click `=`.<br>• <em>Key identity:</em> Sums cylindrical wall area and two circular caps.<br>• <em>Result:</em> `245.044226980003`.<br><br><strong>Example 2:</strong> Sphere surface bounds.<br>• <em>How to type:</em> Enter `4 * pi * 5^2`. <br>• <em>Result:</em> `314.1592`.<br><br><strong>Example 3:</strong> Rectangular prism face area summation.<br>• <em>How to type:</em> Enter `2 * (4*5 + 5*10 + 10*4)`. <br>• <em>Result:</em> `220`.<br><br><strong>Example 4:</strong> Cone curved surface area.<br>• <em>How to type:</em> Enter `pi * 3 * sqrt(3^2 + 4^2)`. <br>• <em>Result:</em> `47.1238`.<br><br><strong>Example 5:</strong> Cylinder side area only.<br>• <em>How to type:</em> Enter `2 * pi * 5 * 15`. <br>• <em>Result:</em> `471.2388`.", 
+        logic: "Total solid surface face metrics are solved by summing outer faces.", 
+        syntax: "2 * pi * 3 * 10 + 2 * pi * 3^2", 
+        example: "2 * pi * 3 * 10 + 2 * pi * 3^2" 
+      },
+
+      // Calculus
+      { 
+        id: "limits_calc", 
+        name: "Limits", 
+        category: "Calculus", 
+        desc: "The foundational concept of calculus, describing function behavior near specific points.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Evaluate classic limit of `sin(x)/x` as `x` approaches 0.<br>• <em>How to type:</em> Press keys: `sin(` `0` `.` `0` `0` `0` `1` `)` `/` `0` `.` `0` `0` `0` `1` and click `=`.<br>• <em>Key identity:</em> Inputting values infinitely close to boundary approximates limit values cleanly.<br>• <em>Result:</em> `1.0`.<br><br><strong>Example 2:</strong> Limit of polynomial quotient as x approaches 2.<br>• <em>How to type:</em> Enter `(2.0001^2 - 4) / (2.0001 - 2)`. <br>• <em>Result:</em> `4.0001`.<br><br><strong>Example 3:</strong> Limit of exponential fraction as x approaches 0.<br>• <em>How to type:</em> Enter `(e^0.0001 - 1) / 0.0001`. <br>• <em>Result:</em> `1.00005`.<br><br><strong>Example 4:</strong> Limit of reciprocal values near infinity bounds.<br>• <em>How to type:</em> Enter `1 / 1000000`. <br>• <em>Result:</em> `0.000001`.<br><br><strong>Example 5:</strong> Right hand limit approximations.<br>• <em>How to type:</em> Enter `log(0.0001)`. <br>• <em>Result:</em> `-9.2103`.", 
+        logic: "Model limits by sampling functions at high precision decimal offsets.", 
+        syntax: "sin(0.0001) / 0.0001", 
+        example: "sin(0.0001) / 0.0001" 
+      },
+      { 
+        id: "continuity", 
+        name: "Continuity", 
+        category: "Calculus", 
+        desc: "Functions where small changes in input lead to small changes in output without sudden jumps.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Verify convergence limits from left and right.<br>• <em>How to type:</em> Press keys: `0` `.` `0` `0` `0` `1` `==` `0` and click `=`.<br>• <em>Key identity:</em> checks if differences converge to baseline values.<br>• <em>Result:</em> `false`.<br><br><strong>Example 2:</strong> Continuous polynomial match checks.<br>• <em>How to type:</em> Enter `2 * 1^2 + 3 == 5`. <br>• <em>Result:</em> `true`.<br><br><strong>Example 3:</strong> Fractional continuity check at division points.<br>• <em>How to type:</em> Enter `1 / 0.0001`. <br>• <em>Result:</em> `10000` (diverging, discontinuous).<br><br><strong>Example 4:</strong> Evaluating continuous trig points.<br>• <em>How to type:</em> Enter `sin(pi)`. <br>• <em>Result:</em> `0`.<br><br><strong>Example 5:</strong> Piecewise function continuity check.<br>• <em>How to type:</em> Enter `3 * (2) - 1 == 2^2 + 1`. <br>• <em>Result:</em> `true`.", 
+        logic: "Evaluate convergence parameters to verify continuous structures.", 
+        syntax: "0.0001 == 0", 
+        example: "0.0001 == 0" 
+      },
+      { 
+        id: "differentiation", 
+        name: "Differentiation", 
+        category: "Calculus", 
+        desc: "Calculating the rate of change of a function with respect to its variable.<br><br><strong>5 Solved Step-by-Step Examples:</strong><br><br><strong>Example 1:</strong> Symbolic derivative of a quadratic function.<br>• <em>How to type:</em> Write: `derivative('3x^3 - 5x^2', 'x')` and click `=`.<br>• <em>Key identity:</em> `derivative` is the symbolic differentiation function, first parameter is the expression, second is variable.<br>• <em>Result:</em> `9 * x^2 - 10 * x`.<br><br><strong>Example 2:</strong> Derivative of trigonometric functions.<br>• <em>How to type:</em> Enter `derivative('sin(x) + cos(x)', 'x')`. <br>• <em>Result:</em> `cos(x) - sin(x)`.<br><br><strong>Example 3:</strong> Derivative of exponential terms.<br>• <em>How to type:</em> Enter `derivative('e^(2x)', 'x')`. <br>• <em>Result:</em> `2 * e^(2 * x)`.<br><br><strong>Example 4:</strong> Logarithmic derivatives.<br>• <em>How to type:</em> Enter `derivative('ln(x)', 'x')`. <br>• <em>Result:</em> `1 / x`.<br><br><strong>Example 5:</strong> Product rule derivatives.<br>• <em>How to type:</em> Enter `derivative('x * sin(x)', 'x')`. <br>• <em>Result:</em> `sin(x) + x * cos(x)`.", 
+        logic: "Isolates rates of change of continuous equations.", 
+        syntax: "derivative('3x^3 - 5x^2', 'x')", 
+        example: "derivative('3x^3 - 5x^2', 'x')" 
+      }
+    ];
+
+    // State Variables
+    let currentKeypadTab = 'numeric'; // numeric, scientific, alphabet
+    let angleMode = 'RAD'; // RAD or DEG
+    let equalClickCount = parseInt(localStorage.getItem('ebenslator_ad_count') || '0');
+    let lastActiveError = null;
+    let currentlySelectedHelpTopic = null;
+    let isDarkTheme = false;
+    let isCalculatorBigger = false;
+
+    // Explicit Key definitions (FIXED REDIRECTS AND BLANK KEYPADS ISSUES)
+    const KEYPAD_NUMERIC = [
+      { label: 'C', action: 'clear', class: 'bg-rose-100 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-900/30 font-bold' },
+      { label: '⌫', action: 'backspace', class: 'key-standard' },
+      { label: '(', action: 'append', val: '(', class: 'key-operator font-bold' },
+      { label: ')', action: 'append', val: ')', class: 'key-operator font-bold' },
+      
+      { label: '7', action: 'append', val: '7', class: 'key-standard font-medium' },
+      { label: '8', action: 'append', val: '8', class: 'key-standard font-medium' },
+      { label: '9', action: 'append', val: '9', class: 'key-standard font-medium' },
+      { label: '÷', action: 'append', val: '/', class: 'key-operator font-bold' },
+      
+      { label: '4', action: 'append', val: '4', class: 'key-standard font-medium' },
+      { label: '5', action: 'append', val: '5', class: 'key-standard font-medium' },
+      { label: '6', action: 'append', val: '6', class: 'key-standard font-medium' },
+      { label: '×', action: 'append', val: '*', class: 'key-operator font-bold' },
+      
+      { label: '1', action: 'append', val: '1', class: 'key-standard font-medium' },
+      { label: '2', action: 'append', val: '2', class: 'key-standard font-medium' },
+      { label: '3', action: 'append', val: '3', class: 'key-standard font-medium' },
+      { label: '−', action: 'append', val: '-', class: 'key-operator font-bold' },
+      
+      { label: '0', action: 'append', val: '0', class: 'key-standard font-medium' },
+      { label: '.', action: 'append', val: '.', class: 'key-standard font-medium' },
+      { label: '+', action: 'append', val: '+', class: 'key-operator font-bold' },
+      { label: '=', action: 'equal', class: 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-extrabold shadow-lg shadow-violet-600/20 font-code' }
+    ];
+
+    const KEYPAD_SCIENTIFIC = [
+      { label: 'sin', action: 'append', val: 'sin(', class: 'key-scientific' },
+      { label: 'cos', action: 'append', val: 'cos(', class: 'key-scientific' },
+      { label: 'tan', action: 'append', val: 'tan(', class: 'key-scientific' },
+      { label: 'sinh', action: 'append', val: 'sinh(', class: 'key-scientific' },
+      
+      { label: 'asin', action: 'append', val: 'asin(', class: 'key-scientific' },
+      { label: 'acos', action: 'append', val: 'acos(', class: 'key-scientific' },
+      { label: 'atan', action: 'append', val: 'atan(', class: 'key-scientific' },
+      { label: 'cosh', action: 'append', val: 'cosh(', class: 'key-scientific' },
+
+      { label: 'ln', action: 'append', val: 'ln(', class: 'key-operator' },
+      { label: 'log', action: 'append', val: 'log10(', class: 'key-operator' },
+      { label: 'π', action: 'append', val: 'pi', class: 'key-operator font-code' },
+      { label: '^', action: 'append', val: '^', class: 'key-operator' },
+
+      { label: '√', action: 'append', val: 'sqrt(', class: 'key-operator font-code font-bold' },
+      { label: 'i', action: 'append', val: 'i', class: 'key-operator font-bold' },
+      { label: 'e', action: 'append', val: 'e', class: 'key-operator' },
+      { label: ',', action: 'append', val: ',', class: 'key-standard' },
+
+      { label: 'det', action: 'append', val: 'det(', class: 'key-scientific font-bold' },
+      { label: 'inv', action: 'append', val: 'inv(', class: 'key-scientific font-bold' },
+      { label: 'derivative', action: 'append', val: "derivative('", class: 'key-scientific text-xs' },
+      { label: 'simplify', action: 'append', val: 'simplify(', class: 'key-scientific text-xs' },
+
+      { label: '[', action: 'append', val: '[', class: 'key-standard' },
+      { label: ']', action: 'append', val: ']', class: 'key-standard' },
+      { label: 'std', action: 'append', val: 'std(', class: 'key-scientific font-bold' },
+      { label: 'var', action: 'append', val: 'variance(', class: 'key-scientific text-xs font-bold' }
+    ];
+
+    const KEYPAD_ALPHABET = [
+      { label: 'a', action: 'append', val: 'a', class: 'key-standard font-semibold' },
+      { label: 'b', action: 'append', val: 'b', class: 'key-standard font-semibold' },
+      { label: 'c', action: 'append', val: 'c', class: 'key-standard font-semibold' },
+      { label: 'd', action: 'append', val: 'd', class: 'key-standard font-semibold' },
+      
+      { label: 'e', action: 'append', val: 'e', class: 'key-standard font-semibold' },
+      { label: 'f', action: 'append', val: 'f', class: 'key-standard font-semibold' },
+      { label: 'g', action: 'append', val: 'g', class: 'key-standard font-semibold' },
+      { label: 'h', action: 'append', val: 'h', class: 'key-standard font-semibold' },
+      
+      { label: 'i', action: 'append', val: 'i', class: 'key-standard font-semibold' },
+      { label: 'j', action: 'append', val: 'j', class: 'key-standard font-semibold' },
+      { label: 'k', action: 'append', val: 'k', class: 'key-standard font-semibold' },
+      { label: 'l', action: 'append', val: 'l', class: 'key-standard font-semibold' },
+      
+      { label: 'm', action: 'append', val: 'm', class: 'key-standard font-semibold' },
+      { label: 'n', action: 'append', val: 'n', class: 'key-standard font-semibold' },
+      { label: 'o', action: 'append', val: 'o', class: 'key-standard font-semibold' },
+      { label: 'p', action: 'append', val: 'p', class: 'key-standard font-semibold' },
+      
+      { label: 'q', action: 'append', val: 'q', class: 'key-standard font-semibold' },
+      { label: 'r', action: 'append', val: 'r', class: 'key-standard font-semibold' },
+      { label: 's', action: 'append', val: 's', class: 'key-standard font-semibold' },
+      { label: 't', action: 'append', val: 't', class: 'key-standard font-semibold' },
+      
+      { label: 'u', action: 'append', val: 'u', class: 'key-standard font-semibold' },
+      { label: 'v', action: 'append', val: 'v', class: 'key-standard font-semibold' },
+      { label: 'w', action: 'append', val: 'w', class: 'key-standard font-semibold' },
+      { label: 'x', action: 'append', val: 'x', class: 'key-operator font-bold' },
+      
+      { label: 'y', action: 'append', val: 'y', class: 'key-operator font-bold' },
+      { label: 'z', action: 'append', val: 'z', class: 'key-operator font-bold' },
+      { label: "'", action: 'append', val: "'", class: 'key-standard' },
+      { label: 'SPACE', action: 'append', val: ' ', class: 'key-standard font-bold col-span-2' }
+    ];
+
+    // DOM Elements Hooking
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+    const themeToggleText = document.getElementById('themeToggleText');
+    const radModeBtn = document.getElementById('radModeBtn');
+    const degModeBtn = document.getElementById('degModeBtn');
+    const inlineClearBtn = document.getElementById('inlineClearBtn');
+    const makeBiggerBtn = document.getElementById('makeBiggerBtn');
+    const biggerBtnText = document.getElementById('biggerBtnText');
+    const biggerBtnIcon = document.getElementById('biggerBtnIcon');
+    const closeBiggerViewFloatingBtn = document.getElementById('closeBiggerViewFloatingBtn');
+
+    // Tab Buttons Explicit Declarations
+    const tabNumericBtn = document.getElementById('tabNumericBtn');
+    const tabScientificBtn = document.getElementById('tabScientificBtn');
+    const tabAlphabetBtn = document.getElementById('tabAlphabetBtn');
+
+    // Diagnostic Box Elements
+    const errorDiagnosticBox = document.getElementById('errorDiagnosticBox');
+    const errorDiagnosticMsg = document.getElementById('errorDiagnosticMsg');
+    const errorAutoFixBtn = document.getElementById('errorAutoFixBtn');
+    const errorCheckTopicBtn = document.getElementById('errorCheckTopicBtn');
+    const closeDiagnosticBtn = document.getElementById('closeDiagnosticBtn');
+
+    // History elements
+    const openHistoryBtn = document.getElementById('openHistoryBtn');
+    const closeHistoryBtn = document.getElementById('closeHistoryBtn');
+    const historyDrawer = document.getElementById('historyDrawer');
+    const historyListContainer = document.getElementById('historyListContainer');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+    // Ad overlay elements
+    const adOverlay = document.getElementById('adOverlay');
+    const skipAdBtn = document.getElementById('skipAdBtn');
+    const adTimerMsg = document.getElementById('adTimerMsg');
+    const skipCountdownText = document.getElementById('skipCountdownText');
+    const adsterraAdSlot = document.getElementById('adsterra-ad-slot');
+    const forceCloseAdBtn = document.getElementById('forceCloseAdBtn');
+    const adsterraSmartLinkFrame = document.getElementById('adsterra-smart-link-frame');
+
+    // Help Center elements
+    const openHelpBtn = document.getElementById('openHelpBtn');
+    const closeHelpBtn = document.getElementById('closeHelpBtn');
+    const helpOverlay = document.getElementById('helpOverlay');
+    const topicSearch = document.getElementById('topicSearch');
+    const topicsContainer = document.getElementById('topicsContainer');
+    const topicPlaceholder = document.getElementById('topicPlaceholder');
+    const topicSelectedContent = document.getElementById('topicSelectedContent');
+    const topicDetailTitle = document.getElementById('topicDetailTitle');
+    const topicDetailCategory = document.getElementById('topicDetailCategory');
+    const topicDetailDesc = document.getElementById('topicDetailDesc');
+    const topicDetailLogic = document.getElementById('topicDetailLogic');
+    const topicDetailSyntax = document.getElementById('topicDetailSyntax');
+    const copySyntaxBtn = document.getElementById('copySyntaxBtn');
+    const tryTopicInCalculatorBtn = document.getElementById('tryTopicInCalculatorBtn');
+
+    // Disclaimer elements
+    const triggerDisclaimerBtn = document.getElementById('triggerDisclaimerBtn');
+    const disclaimerOverlay = document.getElementById('disclaimerOverlay');
+    const closeDisclaimerBtn = document.getElementById('closeDisclaimerBtn');
+    const forceCloseDisclaimerBtn = document.getElementById('forceCloseDisclaimerBtn');
+
+    // On-Init Execution
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.remove('dark-mode');
+      renderKeys();
+      updateSuggestions();
+      renderHistory();
+      renderHelpTopics();
+      calcInputFocus();
+    });
+
+    // Unified Keypad Tab Switch Controls
+    function setKeypadTab(tabName) {
+      currentKeypadTab = tabName;
+      const activeClass = "bg-violet-600 text-white shadow-sm";
+      const inactiveClass = "text-slate-600 dark:text-slate-300 hover:text-slate-900";
+      
+      tabNumericBtn.className = `px-3 py-1 rounded-lg text-xs font-bold transition-all duration-150 cursor-pointer ${tabName === 'numeric' ? activeClass : inactiveClass}`;
+      tabScientificBtn.className = `px-3 py-1 rounded-lg text-xs font-bold transition-all duration-150 cursor-pointer ${tabName === 'scientific' ? activeClass : inactiveClass}`;
+      tabAlphabetBtn.className = `px-3 py-1 rounded-lg text-xs font-bold transition-all duration-150 cursor-pointer ${tabName === 'alphabet' ? activeClass : inactiveClass}`;
+      
+      renderKeys();
+    }
+
+    tabNumericBtn.addEventListener('click', () => setKeypadTab('numeric'));
+    tabScientificBtn.addEventListener('click', () => setKeypadTab('scientific'));
+    tabAlphabetBtn.addEventListener('click', () => setKeypadTab('alphabet'));
+
+    // Toggle Bigger Fullscreen Mode Function
+    function toggleBiggerFullscreen(forceCollapse = false) {
+      if (forceCollapse) {
+        isCalculatorBigger = false;
+      } else {
+        isCalculatorBigger = !isCalculatorBigger;
+      }
+
+      if (isCalculatorBigger) {
+        calculatorCard.classList.add('fullscreen-active');
+        biggerBtnText.innerText = 'Make Calculator Smaller';
+        biggerBtnIcon.innerHTML = '<i class="fa-solid fa-compress text-violet-600"></i>';
+        closeBiggerViewFloatingBtn.classList.remove('hidden');
+      } else {
+        calculatorCard.classList.remove('fullscreen-active');
+        biggerBtnText.innerText = 'Make Calculator Bigger';
+        biggerBtnIcon.innerHTML = '<i class="fa-solid fa-expand text-violet-600"></i>';
+        closeBiggerViewFloatingBtn.classList.add('hidden');
+      }
+      calcInputFocus();
+    }
+
+    makeBiggerBtn.addEventListener('click', () => toggleBiggerFullscreen());
+    closeBiggerViewFloatingBtn.addEventListener('click', () => toggleBiggerFullscreen(true));
+
+    // Keypad Render Loop matching selected tab state
+    function renderKeys() {
+      const buttonsPad = document.getElementById('buttonsPad');
+      buttonsPad.innerHTML = '';
+      let activeKeys = KEYPAD_NUMERIC;
+      if (currentKeypadTab === 'scientific') activeKeys = KEYPAD_SCIENTIFIC;
+      if (currentKeypadTab === 'alphabet') activeKeys = KEYPAD_ALPHABET;
+      
+      activeKeys.forEach(key => {
+        const btn = document.createElement('button');
+        btn.innerText = key.label;
+        btn.className = `py-3 px-1 rounded-xl text-sm font-bold transition-all duration-150 cursor-pointer select-none active:scale-95 flex items-center justify-center border shadow-sm ${key.class}`;
+        btn.onclick = () => {
+          handleAction(key);
+          calcInputFocus();
+        };
+        buttonsPad.appendChild(btn);
+      });
+    }
+
+    // Handles Keyboard/Visual click routing
+    function handleAction(key) {
+      if (key.action === 'append') {
+        insertAtCursor(key.val);
+      } else if (key.action === 'clear') {
+        calcInput.value = '';
+        secondaryDisplay.innerText = '';
+        hideDiagnostic();
+      } else if (key.action === 'backspace') {
+        const val = calcInput.value;
+        calcInput.value = val.substring(0, val.length - 1);
+      } else if (key.action === 'equal') {
+        evaluateCalculationCycle();
+      }
+      updateSuggestions();
+    }
+
+    // Insert character or math expression intelligently at custom cursor location
+    function insertAtCursor(textToInsert) {
+      const input = calcInput;
+      const startPos = input.selectionStart;
+      const endPos = input.selectionEnd;
+      const beforeText = input.value.substring(0, startPos);
+      const afterText = input.value.substring(endPos, input.value.length);
+      
+      input.value = beforeText + textToInsert + afterText;
+      const newCursorPos = startPos + textToInsert.length;
+      input.setSelectionRange(newCursorPos, newCursorPos);
+    }
+
+    calcInput.addEventListener('input', updateSuggestions);
+
+    calcInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        evaluateCalculationCycle();
+      }
+    });
+
+    function calcInputFocus() {
+      calcInput.focus();
+    }
+
+    // Predictive suggestion matching
+    function updateSuggestions() {
+      const val = calcInput.value.toLowerCase().trim();
+      suggestionsWrapper.innerHTML = '';
+      const tokens = val.split(/[\s+\-*/()^,]+/);
+      const lastToken = tokens[tokens.length - 1];
+
+      let matches = [];
+      if (lastToken.length > 0) {
+        matches = AUTO_SUGGESTIONS.filter(item => item.name.startsWith(lastToken));
+      }
+
+      if (matches.length === 0) {
+        matches = AUTO_SUGGESTIONS.slice(0, 5);
+      }
+
+      matches.forEach(item => {
+        const pill = document.createElement('button');
+        pill.className = `px-3 py-1 border rounded-full text-[11px] font-code transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
+          isDarkTheme 
+            ? 'bg-slate-900 border-slate-800 hover:border-violet-500/50 text-slate-300 hover:text-white'
+            : 'bg-white border-slate-300 hover:border-violet-500 text-slate-700 hover:text-slate-900'
+        }`;
+        pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span><strong>${item.name}</strong><span class="text-[9px] text-slate-500">${item.type}</span>`;
+        
+        pill.addEventListener('click', () => {
+          const startPos = calcInput.selectionStart;
+          const beforeTokenPos = startPos - lastToken.length;
+          
+          if (lastToken.length > 0 && calcInput.value.substring(beforeTokenPos, startPos).toLowerCase() === lastToken) {
+            calcInput.value = calcInput.value.substring(0, beforeTokenPos) + item.syntax + calcInput.value.substring(startPos);
+          } else {
+            insertAtCursor(item.syntax);
+          }
+          
+          calcInputFocus();
+          updateSuggestions();
+        });
+        
+        suggestionsWrapper.appendChild(pill);
+      });
+    }
+
+    // Core execution pipeline: trigger ad strictly on modulo 9 (after 8 free clicks)
+    function evaluateCalculationCycle() {
+      const rawExpression = calcInput.value.trim();
+      if (!rawExpression) {
+        showDiagnostic("The expression is empty. Please enter a mathematical problem to solve.", "Empty Input");
+        return;
+      }
+
+      equalClickCount++;
+      localStorage.setItem('ebenslator_ad_count', equalClickCount);
+
+      // Trigger ad strictly after 8 equal clicks (on the 9th click, 18th click, etc.)
+      const shouldShowAd = (equalClickCount !== 0 && equalClickCount % 9 === 0);
+
+      if (shouldShowAd) {
+        triggerInteractiveAd(() => {
+          executeMathExpression(rawExpression);
+        });
+      } else {
+        executeMathExpression(rawExpression);
+      }
+    }
+
+    // Dynamic Adsterra script load with zero-redirect overlay enforcement and 70 seconds countdown
+    function triggerInteractiveAd(onAdFinishedCallback) {
+      adOverlay.classList.remove('hidden');
+      
+      // Ad must finish before closing/progressing: Hide close cross & disable skip actions
+      skipAdBtn.disabled = true;
+      skipAdBtn.className = "w-full py-3 bg-slate-800 text-slate-500 font-bold rounded-xl border border-slate-700 transition-all duration-300 flex items-center justify-center gap-2 cursor-not-allowed shadow-md";
+      forceCloseAdBtn.classList.add('hidden'); // Hide the manual close cross
+      
+      // Load Adsterra direct Smart Link inside standard iframe with sandbox to strictly prevent top-level redirects
+      adsterraSmartLinkFrame.src = "https://www.profitablecpmratenetwork.com/kj2rfg87?key=7826a8e7314ad9be47a0bba4a610ecd4";
+
+       let timeLeft = 70;
+      const timerCountSpan = document.getElementById('overlayTimerCount');
+      const timerBadge = document.getElementById('prominentTimerBadge');
+      
+      // Initialize states
+      if (timerCountSpan) timerCountSpan.innerText = timeLeft;
+      if (timerBadge) {
+        timerBadge.className = "absolute top-4 left-4 px-3 py-1.5 bg-rose-500/25 border border-rose-500/30 rounded-xl text-rose-300 font-extrabold text-[11px] flex items-center gap-1.5 shadow-md z-20 animate-pulse";
+        timerBadge.innerHTML = `<i class="fa-solid fa-hourglass-half text-[10px]"></i><span>Timer: <span id="overlayTimerCount" class="font-code text-xs text-white">${timeLeft}</span>s</span>`;
+      }
+      adTimerMsg.innerText = `You can close this sponsorship in ${timeLeft} seconds`;
+      skipCountdownText.innerText = `Please wait... ${timeLeft}s`;
+
+      const countdownInterval = setInterval(() => {
+        timeLeft--;
+        const curCountSpan = document.getElementById('overlayTimerCount');
+        if (curCountSpan) curCountSpan.innerText = timeLeft;
+        
+        if (timeLeft > 0) {
+          adTimerMsg.innerText = `You can close this sponsorship in ${timeLeft} seconds`;
+          skipCountdownText.innerText = `Please wait... ${timeLeft}s`;
+        } else {
+          clearInterval(countdownInterval);
+          if (timerBadge) {
+            timerBadge.className = "absolute top-4 left-4 px-3 py-1.5 bg-emerald-500/25 border border-emerald-500/30 rounded-xl text-emerald-400 font-extrabold text-[11px] flex items-center gap-1.5 shadow-md z-20";
+            timerBadge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500"></i><span>Ad Complete!</span>`;
+          }
+          adTimerMsg.innerHTML = `<span class="text-emerald-400 font-bold">Sponsor Ad Complete! <i class="fa-solid fa-circle-check"></i></span>`;
+          skipCountdownText.innerText = `Return to Calculator`;
+          skipAdBtn.disabled = false;
+          skipAdBtn.className = "w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-extrabold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-500/20";
+          
+          // Once countdown finishes, allow manual closing too
+          forceCloseAdBtn.classList.remove('hidden');
+        }
+      }, 1000);
+
+      // Skip action callback execution (only selectable when ad is completed)
+      const skipAction = () => {
+        adOverlay.classList.add('hidden');
+        skipAdBtn.onclick = null;
+        forceCloseAdBtn.onclick = null;
+        adsterraSmartLinkFrame.src = "about:blank"; // Flush ad
+        onAdFinishedCallback();
+      };
+      
+      skipAdBtn.onclick = skipAction;
+      forceCloseAdBtn.onclick = skipAction;
+    }
+
+    // Ultimate Precision Evaluation Engine using Math.js
+    function executeMathExpression(expression) {
+      try {
+        hideDiagnostic();
+        const evaluationScope = {};
+        
+        if (angleMode === 'DEG') {
+          evaluationScope.sin = (x) => math.sin(math.unit(x, 'deg'));
+          evaluationScope.cos = (x) => math.cos(math.unit(x, 'deg'));
+          evaluationScope.tan = (x) => math.tan(math.unit(x, 'deg'));
+          evaluationScope.sec = (x) => math.sec(math.unit(x, 'deg'));
+          evaluationScope.cot = (x) => math.cot(math.unit(x, 'deg'));
+          evaluationScope.csc = (x) => math.csc(math.unit(x, 'deg'));
+          
+          evaluationScope.asin = (x) => math.multiply(math.asin(x), 180 / Math.PI);
+          evaluationScope.acos = (x) => math.multiply(math.acos(x), 180 / Math.PI);
+          evaluationScope.atan = (x) => math.multiply(math.atan(x), 180 / Math.PI);
+          evaluationScope.atan2 = (y, x) => math.multiply(math.atan2(y, x), 180 / Math.PI);
+        }
+
+        let sanitized = expression
+          .replace(/×/g, '*')
+          .replace(/&times;/g, '*')
+          .replace(/−/g, '-')
+          .replace(/÷/g, '/');
+
+        const evaluationResult = math.evaluate(sanitized, evaluationScope);
+        
+        let resultString = '';
+        if (evaluationResult !== undefined) {
+          if (typeof evaluationResult === 'object' && evaluationResult.entries) {
+            resultString = JSON.stringify(evaluationResult.entries);
+          } else if (typeof evaluationResult === 'function') {
+            resultString = 'Function declaration';
+          } else {
+            resultString = math.format(evaluationResult, { precision: 14 });
+          }
+        } else {
+          resultString = '0';
+        }
+
+        secondaryDisplay.innerText = `${expression} =`;
+        calcInput.value = resultString;
+        saveToHistory(expression, resultString);
+
+      } catch (err) {
+        analyzeAndDisplayError(err, expression);
+      }
+    }
+
+    // Intelligent Deep Diagnostics and Auto-Fix Error Handler
+    function analyzeAndDisplayError(error, faultyExpr) {
+      lastActiveError = faultyExpr;
+      let diagnosticMsg = '';
+      let errorStr = error.message.toLowerCase();
+
+      if (errorStr.includes('parenthes') || errorStr.includes('bracket') || errorStr.includes('unbalanced')) {
+        diagnosticMsg = "<strong>Parentheses / Bracket Mismatch:</strong> You have an unbalanced set of parenthetical statements or square brackets. <br><em class='text-rose-700 dark:text-rose-300 block mt-1 font-medium'>How to Fix: Ensure every opened bracket '(' or '[' has its corresponding closed mate ')' or ']'. For instance, use sin(45) instead of sin(45.</em>";
+      } else if (errorStr.includes('unexpected') || errorStr.includes('operator') || errorStr.includes('syntax')) {
+        diagnosticMsg = "<strong>Syntax / Operator Collision:</strong> Consecutive mathematical operators have been inputted (such as '++' or '/*') or punctuation was structured incorrectly. <br><em class='text-rose-700 dark:text-rose-300 block mt-1 font-medium'>How to Fix: Eliminate sequential operators and review algebraic grammar structures.</em>";
+      } else if (errorStr.includes('undefined symbol') || errorStr.includes('function') || errorStr.includes('variable')) {
+        const symbolMatch = error.message.match(/"([^"]+)"/);
+        const undefinedChar = symbolMatch ? symbolMatch[1] : 'character';
+        diagnosticMsg = `<strong>Undefined Parameter or Formula Method '${undefinedChar}':</strong> The system detected an unrecognized keyword or missing algebraic multiplication indicator. <br><em class='text-rose-700 dark:text-rose-300 block mt-1 font-medium'>How to Fix: Make sure implicit multiplication constants are explicitly indicated using multiplying signs (e.g., '2 * x' instead of '2x').</em>`;
+      } else if (errorStr.includes('dimension') || errorStr.includes('matrix')) {
+        diagnosticMsg = "<strong>Matrix Grid Dimension Discrepancy:</strong> The dimensional sizes of Matrix arrays do not line up with computational rules. <br><em class='text-rose-700 dark:text-rose-300 block mt-1 font-medium'>How to Fix: Verify nested row structures. Multiplications require columns of Matrix A to equal rows of Matrix B.</em>";
+      } else {
+        diagnosticMsg = `<strong>Expression Interpretation Fail:</strong> ${error.message}. <br><em class='text-rose-700 dark:text-rose-300 block mt-1 font-medium'>How to Fix: Review the expression components and syntax alignments.</em>`;
+      }
+
+      showDiagnostic(diagnosticMsg);
+    }
+
+    function showDiagnostic(message) {
+      errorDiagnosticMsg.innerHTML = message;
+      errorDiagnosticBox.classList.remove('hidden');
+    }
+
+    function hideDiagnostic() {
+      errorDiagnosticBox.classList.add('hidden');
+      lastActiveError = null;
+    }
+
+    closeDiagnosticBtn.addEventListener('click', hideDiagnostic);
+
+    errorCheckTopicBtn.addEventListener('click', () => {
+      helpOverlay.classList.remove('hidden');
+      topicSearch.value = '';
+      renderHelpTopics();
+    });
+
+    // Auto-Correction Algorithm
+    errorAutoFixBtn.addEventListener('click', () => {
+      if (!lastActiveError) return;
+      let fixed = lastActiveError;
+
+      // Fix 1: Auto-close brackets
+      const openCount = (fixed.match(/\(/g) || []).length;
+      const closeCount = (fixed.match(/\)/g) || []).length;
+      if (openCount > closeCount) {
+        fixed += ')'.repeat(openCount - closeCount);
+      }
+
+      // Fix 2: Clean trailing operators
+      fixed = fixed.replace(/[\+\-\*\/]+$/, '');
+
+      // Fix 3: Standardize implicit multiply (e.g. 2(3) to 2*(3))
+      fixed = fixed.replace(/(\d+)\(/g, '$1*(');
+
+      calcInput.value = fixed;
+      hideDiagnostic();
+      updateSuggestions();
+      executeMathExpression(fixed);
+    });
+
+    inlineClearBtn.addEventListener('click', () => {
+      calcInput.value = '';
+      secondaryDisplay.innerText = '';
+      hideDiagnostic();
+      updateSuggestions();
+    });
+
+    // Browser offline secure history ledger logic
+    function saveToHistory(expr, res) {
+      let currentHistory = JSON.parse(localStorage.getItem('ebenslator_history') || '[]');
+      const ledgerItem = {
+        id: Date.now(),
+        expression: expr,
+        result: res,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      currentHistory.unshift(ledgerItem);
+      if (currentHistory.length > 30) currentHistory.pop();
+      localStorage.setItem('ebenslator_history', JSON.stringify(currentHistory));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      historyListContainer.innerHTML = '';
+      const currentHistory = JSON.parse(localStorage.getItem('ebenslator_history') || '[]');
+
+      if (currentHistory.length === 0) {
+        historyListContainer.innerHTML = `
+          <div class="py-12 text-center text-slate-500 font-sans">
+            <i class="fa-solid fa-calculator text-4xl mb-3 text-slate-400"></i>
+            <p class="text-sm">No mathematical entries saved yet.</p>
+          </div>
+        `;
+        return;
+      }
+
+      currentHistory.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'p-3 bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-violet-500/30 transition-all duration-150 relative group';
+        row.innerHTML = `
+          <div class="flex items-center justify-between text-[10px] text-slate-500 mb-1">
+            <span>Local Offline Ledger</span>
+            <span>${item.timestamp}</span>
+          </div>
+          <div class="font-code text-xs text-slate-700 dark:text-slate-300 break-all select-all hover:text-black dark:hover:text-white transition-colors cursor-pointer" onclick="restoreExpr('${item.expression.replace(/'/g, "\\'")}')">
+            ${item.expression}
+          </div>
+          <div class="font-code text-sm text-emerald-600 dark:text-emerald-400 mt-1 font-bold text-right select-all break-all">
+            = ${item.result}
+          </div>
+          <div class="mt-2 flex justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+            <button onclick="restoreExpr('${item.expression.replace(/'/g, "\\'")}')" class="px-2 py-0.5 bg-violet-100 hover:bg-violet-200 text-violet-700 text-[10px] rounded border border-violet-200 cursor-pointer">
+              Use Formula
+            </button>
+            <button onclick="copyToClipboard('${item.result}')" class="px-2 py-0.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-700 text-[10px] rounded border border-emerald-200 cursor-pointer">
+              Copy Result
+            </button>
+          </div>
+        `;
+        historyListContainer.appendChild(row);
+      });
+    }
+
+    window.restoreExpr = function(expr) {
+      calcInput.value = expr;
+      secondaryDisplay.innerText = '';
+      hideDiagnostic();
+      historyDrawer.classList.add('hidden');
+      updateSuggestions();
+      calcInputFocus();
+    };
+
+    window.copyToClipboard = function(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to Clipboard: ' + text);
+      });
+    };
+
+    clearHistoryBtn.addEventListener('click', () => {
+      if (confirm('Clear all offline logs from your local database?')) {
+        localStorage.removeItem('ebenslator_history');
+        renderHistory();
+      }
+    });
+
+    openHistoryBtn.addEventListener('click', () => historyDrawer.classList.remove('hidden'));
+    closeHistoryBtn.addEventListener('click', () => historyDrawer.classList.add('hidden'));
+
+    // HELP CENTER LOGIC
+    openHelpBtn.addEventListener('click', () => {
+      helpOverlay.classList.remove('hidden');
+      topicSearch.value = '';
+      renderHelpTopics();
+    });
+
+    closeHelpBtn.addEventListener('click', () => helpOverlay.classList.add('hidden'));
+    topicSearch.addEventListener('input', () => renderHelpTopics(topicSearch.value));
+
+    function renderHelpTopics(filterStr = '') {
+      topicsContainer.innerHTML = '';
+      const query = filterStr.toLowerCase().trim();
+      const filtered = MATH_TOPICS.filter(topic => 
+        topic.name.toLowerCase().includes(query) || 
+        topic.category.toLowerCase().includes(query) ||
+        topic.desc.toLowerCase().includes(query)
+      );
+
+      if (filtered.length === 0) {
+        topicsContainer.innerHTML = `<div class="p-6 text-center text-xs text-slate-500">No matching subjects found.</div>`;
+        return;
+      }
+
+      filtered.forEach(topic => {
+        const row = document.createElement('button');
+        row.className = `w-full text-left p-3.5 rounded-xl border transition-all duration-150 cursor-pointer flex items-center justify-between group active:scale-[0.99] ${
+          currentlySelectedHelpTopic && currentlySelectedHelpTopic.id === topic.id
+            ? 'bg-emerald-100 dark:bg-emerald-950/40 border-emerald-500 text-slate-800 dark:text-slate-100 font-bold shadow-sm'
+            : 'bg-white dark:bg-slate-950/40 border-slate-200 dark:border-slate-850 hover:border-slate-300 text-slate-700 dark:text-slate-300 hover:text-slate-900'
+        }`;
+
+        row.innerHTML = `
+          <div class="flex flex-col gap-1 pr-2">
+            <span class="text-xs font-bold">${topic.name}</span>
+            <span class="text-[9px] text-slate-500 font-medium uppercase">${topic.category}</span>
+          </div>
+          <i class="fa-solid fa-angle-right text-xs opacity-40 group-hover:opacity-100 transition-opacity"></i>
+        `;
+
+        row.addEventListener('click', () => {
+          currentlySelectedHelpTopic = topic;
+          topicPlaceholder.classList.add('hidden');
+          topicSelectedContent.classList.remove('hidden');
+
+          topicDetailTitle.innerText = topic.name;
+          topicDetailCategory.innerText = topic.category;
+          topicDetailDesc.innerHTML = topic.desc;
+          topicDetailLogic.innerHTML = topic.logic;
+          topicDetailSyntax.innerText = topic.syntax;
+
+          renderHelpTopics(filterStr);
+        });
+
+        topicsContainer.appendChild(row);
+      });
+    }
+
+    copySyntaxBtn.addEventListener('click', () => {
+      if (!currentlySelectedHelpTopic) return;
+      navigator.clipboard.writeText(currentlySelectedHelpTopic.syntax).then(() => {
+        alert('Copied formula!');
+      });
+    });
+
+    tryTopicInCalculatorBtn.addEventListener('click', () => {
+      if (!currentlySelectedHelpTopic) return;
+      calcInput.value = currentlySelectedHelpTopic.example;
+      secondaryDisplay.innerText = '';
+      hideDiagnostic();
+      helpOverlay.classList.add('hidden');
+      updateSuggestions();
+      calcInputFocus();
+    });
+
+    triggerDisclaimerBtn.addEventListener('click', () => disclaimerOverlay.classList.remove('hidden'));
+    closeDisclaimerBtn.addEventListener('click', () => disclaimerOverlay.classList.add('hidden'));
+    forceCloseDisclaimerBtn.addEventListener('click', () => disclaimerOverlay.classList.add('hidden'));
+
+    // Prevent top level redirects from inside iframe by listening to beforeunload events
+    window.addEventListener('beforeunload', (e) => {
+      e.preventDefault();
+    });
+
+    // Default initialization
+    renderKeys();
+  </script>
+</body>
+</html>
