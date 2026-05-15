@@ -1,0 +1,23 @@
+{
+  "name": "ebenslator",
+  "version": "1.0.0",
+  "description": "An incredibly powerful, ultra-accurate, and beautifully designed online scientific calculator",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebenezerokwuanasor-png/ebenslator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ebenezerokwuanasor-png/ebenslator/issues"
+  },
+  "homepage": "https://github.com/ebenezerokwuanasor-png/ebenslator#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
